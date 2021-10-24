@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/25 02:59:37 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/10/25 03:30:43 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
+	char			*current_path;
 	struct s_static file_data;
 }	t_data;
 
