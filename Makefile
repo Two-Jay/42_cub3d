@@ -18,7 +18,7 @@ INCDIR = ./includes/
 OBJDIR = ./obj/
 SRCDIR = ./src/
 LIBDIR = ./lib/libft/
-MLXDIR = ./lib/minilibx_opengl_20191021/
+MLXDIR = ./lib/minilibx_opengl/
 LIBFT_DIR = ./lib/libft/
 MAPDIR = ./map/
 
@@ -31,11 +31,8 @@ MINILIBX = $(MLXDIR)libmlx.dylib
 
 SRCFILE = cub3d.c
 
-SRCFILE_OBJ	=	$(SRCFILE:.c=.o)
-OBJECTS		=	$(addprefix $(OBJDIR), $(SRCFILE_OBJ))
-
-
-.PHONY: all re clean fclean
+SRC_OBJ_FILE	=	$(SRCFILE:.c=.o)
+SRC_OBJ	=	$(addprefix $(OBJDIR), $(SRC_OBJ_FILE))
 
 all: $(NAME)
 
@@ -43,10 +40,10 @@ $(OBJDIR)%.o : $(SRCDIR)%.c
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(CCFLAG) $(INCLUDES) $< -c -o $@
 
-$(NAME)		:	$(OBJECTS)
+$(NAME)		:	$(SRC_OBJ)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(MLXDIR)
-	@$(CC) $(CCFLAG) $(OBJECTS) $(LIBFLAG) $(INCLUDES) -o $@
+	@$(CC) $(CCFLAG) $(SRC_OBJ) $(LIBFLAG) $(INCLUDES) -o $@
 	@echo "\033[0;92m* $(NAME) program file was created *\033[0m"
 
 clean:
@@ -63,3 +60,4 @@ re:
 	@$(MAKE) fclean
 	@$(MAKE) all
 
+.PHONY: all re clean fclean
