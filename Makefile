@@ -29,7 +29,8 @@ INCLUDES = -I$(HEAD_DIR) -I$(LIBFT_DIR) -I$(MLXDIR)
 LIBFT = $(LIBFT_DIR)libft.a
 MINILIBX = $(MLXDIR)libmlx.dylib
 
-SRCFILE = cub3d.c
+SRCFILE =	cub3d.c mapparser.c
+
 
 SRC_OBJ_FILE	=	$(SRCFILE:.c=.o)
 SRC_OBJ	=	$(addprefix $(OBJDIR), $(SRC_OBJ_FILE))

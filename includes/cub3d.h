@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/24 14:19:52 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/10/25 02:59:37 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ typedef struct s_data
 	void			*win_ptr;
 	struct s_static file_data;
 }	t_data;
+
+int parse_mapfile(char *filepath, t_data *data);
 
 #endif

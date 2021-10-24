@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   mapparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 13:59:38 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/25 03:20:57 by jekim            ###   ########seoul.kr  */
+/*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
+/*   Updated: 2021/10/25 03:23:52 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	init_game(int argc, char **argv, t_data *data)
+int	run_mapfile(char *filepath)
 {
-	if (argc != 2)
-		ft_strerr("Error\n");
-	parse_mapfile(argv[1], data);
-	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, 800, 600, "cub3.d");
+	int	path_l;
+	int	fd_check;
+
+	path_l = ft_strlen(filepath);
+	if (!ft_strequel(filepath + path_l - 4, ".cub"))
+		ft_strerr("Error : invaild map file\n");
+	fd_check = open(filepath, O_RDONLY, NULL);
+	if (fd_check == -1)
+		ft_strerr("Error : invaild map file\n");
+	return (fd_check);
 }
 
-int	main(int argc, char **argv)
+int	parse_mapfile(char *filepath, t_data *data)
 {
-	t_data	data;
+	int	map_fd;
 
-	init_game(argc, argv, &data);
-	return (EXIT_SUCCESS);
+	trp(data);
+	map_fd = run_mapfile(filepath);
+	tri(map_fd);
+	return (0);
 }
