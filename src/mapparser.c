@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/25 04:13:47 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/10/25 23:38:31 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,71 @@ int	run_mapfile(char *filepath, t_data *data)
 	return (fd_check);
 }
 
+int get_splited_len(char **splited)
+{
+	int ix;
+
+	ix = -1;
+	while (splited[++ix])
+		;
+	return (ix);
+}
+
+void free_splited(char **splited)
+{
+	int ix;
+
+	ix = -1;
+	while (splited[++ix])
+		free(splited[ix]);
+	free(splited);
+	splited = NULL;
+}
+
+int	parse_imagepath(int fd, char **ptr, char *key)
+{
+	char	*line;
+	char	**splited;
+	int		line_check;
+
+	line_check = ft_strgnl(fd, &line);
+	if (line_check != 1)
+		return (1);
+	splited = ft_split(line, ' ');
+	if (splited == NULL
+		|| get_splited_len(splited) != 2
+		|| !ft_strequel(splited[0], key))
+		return (1);
+	*ptr = ft_strdup(splited[1]);
+	free_splited(splited);
+	return (0);
+}
+
+int	parse_all_imagepaths(int map_fd, t_data *data)
+{
+	if (parse_imagepath(map_fd, &(data->file_data.NO_image_filename), "NO")
+		|| parse_imagepath(map_fd, &(data->file_data.SO_image_filename), "SO")
+		|| parse_imagepath(map_fd, &(data->file_data.WE_image_filename), "WE")
+		|| parse_imagepath(map_fd, &(data->file_data.EA_image_filename), "EA"))
+		return (1);
+	return (0);
+}
+
+// int parse_RGBvalue(int fd, int *ptr, char *key)
+// {
+// 	return (0);
+// }
+
+// int	parse_all_RGBvalue(int map_fd, t_data *data)
+// {
+// 	return (0);
+// }
+
+// int	parse_mapdata(int map_fd, t_data *data)
+// {
+// 	return (0);
+// }
+
 int	parse_mapfile(char *filepath, t_data *data)
 {
 	int	map_fd;
@@ -58,9 +123,7 @@ int	parse_mapfile(char *filepath, t_data *data)
 	map_fd = run_mapfile(filepath, data);
 	if (map_fd == -1)
 		ft_strerr("Error : map file error\n");
-	if (parse_imagepath(map_fd, data)
-		|| parse_RGB(map_fd, data)
-		|| parse_mapdata(map_fd, data))
-		return (close(map_fd) || 1);
+	if (parse_all_imagepath(map_fd, data))
+		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));
 	return (close(map_fd));
 }
