@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/25 03:30:43 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/10/26 00:28:37 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,8 @@ typedef struct s_static
 	int		WE_image_fd;
 	char	*EA_image_filename;
 	int		EA_image_fd;
-	int		floor_R;
-	int		floor_G;
-	int		floor_B;
-	int		celling_R;
-	int		celling_G;
-	int		celling_B;
+	int		*F_RGB;
+	int		*C_RGB;
 }	t_static;
 
 typedef struct s_data

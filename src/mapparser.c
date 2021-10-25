@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/25 23:38:31 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/10/26 00:53:04 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,20 @@ char	*make_abspath(char *pwd, char *filepath, t_data *data)
 	return (ret);
 }
 
+void free_splited(char **splited)
+{
+	int ix;
+
+	ix = -1;
+	if (splited)
+	{
+		while (splited[++ix])
+			free(splited[ix]);
+		free(splited);
+		splited = NULL;
+	}
+}
+
 int	run_mapfile(char *filepath, t_data *data)
 {
 	int		path_l;
@@ -51,9 +65,9 @@ int	run_mapfile(char *filepath, t_data *data)
 	return (fd_check);
 }
 
-int get_splited_len(char **splited)
+int	get_splited_len(char **splited)
 {
-	int ix;
+	int	ix;
 
 	ix = -1;
 	while (splited[++ix])
@@ -61,15 +75,19 @@ int get_splited_len(char **splited)
 	return (ix);
 }
 
-void free_splited(char **splited)
+char **get_and_check_splited(char *src, char c, int check_l, char *key)
 {
-	int ix;
+	char **ret;
 
-	ix = -1;
-	while (splited[++ix])
-		free(splited[ix]);
-	free(splited);
-	splited = NULL;
+	ret = ft_split(src, c);
+	if (ret == NULL
+		|| get_splited_len(ret) != check_l
+		|| !ft_strequel(ret[0], key))
+	{
+		free_splited(ret);
+		return (NULL);
+	}
+	return (ret);
 }
 
 int	parse_imagepath(int fd, char **ptr, char *key)
@@ -81,10 +99,8 @@ int	parse_imagepath(int fd, char **ptr, char *key)
 	line_check = ft_strgnl(fd, &line);
 	if (line_check != 1)
 		return (1);
-	splited = ft_split(line, ' ');
-	if (splited == NULL
-		|| get_splited_len(splited) != 2
-		|| !ft_strequel(splited[0], key))
+	splited = get_and_check_splited(line, ' ', 2, key);
+	if (splited == NULL)
 		return (1);
 	*ptr = ft_strdup(splited[1]);
 	free_splited(splited);
@@ -101,15 +117,85 @@ int	parse_all_imagepaths(int map_fd, t_data *data)
 	return (0);
 }
 
-// int parse_RGBvalue(int fd, int *ptr, char *key)
-// {
-// 	return (0);
-// }
+char	**get_RGBstr(int fd, char *key)
+{
+	char	*line;
+	char	**splited;
+	char	**rgb_arr;
+	int		line_check;
 
-// int	parse_all_RGBvalue(int map_fd, t_data *data)
-// {
-// 	return (0);
-// }
+	line_check = ft_strgnl(fd, &line);
+	if (line_check != 1)
+		return (NULL);
+	splited = get_and_check_splited(line, ' ', 2, key);
+	if (splited == NULL)
+		return (NULL);
+	rgb_arr = ft_split(splited[1], ',');
+	if (rgb_arr == NULL
+		|| get_splited_len(rgb_arr) != 3)
+		return (NULL);
+	return (rgb_arr);
+}
+
+int	get_RGBvalue(char **parsed, t_data *data, char key)
+{
+	int	ix;
+	int	ovf_flag;
+	int	value;
+
+	ix = 0;
+	ovf_flag = 0;
+	while (ix != 3 && parsed[ix])
+	{
+		if (ft_isable_strtonbr(parsed[ix]))
+			return (1);
+		value = ft_atoi_covf(parsed[ix], &ovf_flag);
+		if (ovf_flag == 1 || value < 0 || value > 255)
+			return (1);
+		if (key == 'F')
+			data->file_data.F_RGB[ix] = value;
+		if (key == 'C')
+			data->file_data.C_RGB[ix] = value;
+		ix++;
+	}
+	return (0);
+}
+
+// i thought "in a strict order" means
+// a empty line must be there after the image paths
+// so, i made this function to skip the empty line
+// between RGB value line and that.
+int	skip_line(int map_fd)
+{
+	int		check;
+	char	*line;
+
+	check = ft_strgnl(map_fd, &line);
+	if (ft_strlen(line) > 1)
+		return (1);
+	return (0);
+}
+
+int	parse_all_RGBvalue(int map_fd, t_data *data)
+{
+	char	**rgb_parsed;
+
+	data->file_data.F_RGB = (int *)malloc(sizeof(int) * 4);
+	data->file_data.C_RGB = (int *)malloc(sizeof(int) * 4);
+	if (!data->file_data.F_RGB || !data->file_data.C_RGB)
+		return (1);
+	data->file_data.F_RGB[3] = '\0';
+	data->file_data.C_RGB[3] = '\0';
+	rgb_parsed = get_RGBstr(map_fd, "F");
+	if (skip_line(map_fd) || get_RGBvalue(rgb_parsed, data, 'F'))
+		return (1);
+	free_splited(rgb_parsed);
+	rgb_parsed = get_RGBstr(map_fd, "C");
+	if (get_RGBvalue(rgb_parsed, data, 'C'))
+		return (1);
+	free_splited(rgb_parsed);
+	return (0);
+}
 
 // int	parse_mapdata(int map_fd, t_data *data)
 // {
@@ -123,7 +209,8 @@ int	parse_mapfile(char *filepath, t_data *data)
 	map_fd = run_mapfile(filepath, data);
 	if (map_fd == -1)
 		ft_strerr("Error : map file error\n");
-	if (parse_all_imagepath(map_fd, data))
+	if (parse_all_imagepaths(map_fd, data)
+		|| parse_all_RGBvalue(map_fd, data))
 		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));
 	return (close(map_fd));
 }
