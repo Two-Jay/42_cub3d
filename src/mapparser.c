@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/26 00:53:04 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/10/26 01:08:42 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,15 @@ int	parse_imagepath(int fd, char **ptr, char *key)
 
 int	parse_all_imagepaths(int map_fd, t_data *data)
 {
-	if (parse_imagepath(map_fd, &(data->file_data.NO_image_filename), "NO")
-		|| parse_imagepath(map_fd, &(data->file_data.SO_image_filename), "SO")
-		|| parse_imagepath(map_fd, &(data->file_data.WE_image_filename), "WE")
-		|| parse_imagepath(map_fd, &(data->file_data.EA_image_filename), "EA"))
+	if (parse_imagepath(map_fd, &(data->map_data.NO_image_filename), "NO")
+		|| parse_imagepath(map_fd, &(data->map_data.SO_image_filename), "SO")
+		|| parse_imagepath(map_fd, &(data->map_data.WE_image_filename), "WE")
+		|| parse_imagepath(map_fd, &(data->map_data.EA_image_filename), "EA"))
 		return (1);
+	trs(data->map_data.NO_image_filename);
+	trs(data->map_data.SO_image_filename);
+	trs(data->map_data.WE_image_filename);
+	trs(data->map_data.EA_image_filename);
 	return (0);
 }
 
@@ -153,9 +157,9 @@ int	get_RGBvalue(char **parsed, t_data *data, char key)
 		if (ovf_flag == 1 || value < 0 || value > 255)
 			return (1);
 		if (key == 'F')
-			data->file_data.F_RGB[ix] = value;
+			data->map_data.F_RGB[ix] = value;
 		if (key == 'C')
-			data->file_data.C_RGB[ix] = value;
+			data->map_data.C_RGB[ix] = value;
 		ix++;
 	}
 	return (0);
@@ -180,18 +184,22 @@ int	parse_all_RGBvalue(int map_fd, t_data *data)
 {
 	char	**rgb_parsed;
 
-	data->file_data.F_RGB = (int *)malloc(sizeof(int) * 4);
-	data->file_data.C_RGB = (int *)malloc(sizeof(int) * 4);
-	if (!data->file_data.F_RGB || !data->file_data.C_RGB)
+	data->map_data.F_RGB = (int *)malloc(sizeof(int) * 4);
+	data->map_data.C_RGB = (int *)malloc(sizeof(int) * 4);
+	if (!data->map_data.F_RGB || !data->map_data.C_RGB)
 		return (1);
-	data->file_data.F_RGB[3] = '\0';
-	data->file_data.C_RGB[3] = '\0';
+	data->map_data.F_RGB[3] = '\0';
+	data->map_data.C_RGB[3] = '\0';
+	if (skip_line(map_fd))
+		return (1);
 	rgb_parsed = get_RGBstr(map_fd, "F");
-	if (skip_line(map_fd) || get_RGBvalue(rgb_parsed, data, 'F'))
+	if (rgb_parsed == NULL
+		|| get_RGBvalue(rgb_parsed, data, 'F'))
 		return (1);
 	free_splited(rgb_parsed);
 	rgb_parsed = get_RGBstr(map_fd, "C");
-	if (get_RGBvalue(rgb_parsed, data, 'C'))
+	if (rgb_parsed == NULL
+		|| get_RGBvalue(rgb_parsed, data, 'C'))
 		return (1);
 	free_splited(rgb_parsed);
 	return (0);
