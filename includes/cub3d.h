@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/24 14:19:52 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/10/30 16:37:45 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,33 @@
 # define tri(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%d\n", x); }
 # define trp(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%p\n", x); }
 
+typedef enum s_maptile_type
+{
+	NON = 0,
+	WALL,
+	PLYR,
+	FLR,
+	SPRT
+}	t_maptile_type;
+
 typedef struct s_static
 {
 	char	*NO_image_filename;
-	int		NO_image_fd;
 	char	*SO_image_filename;
-	int		SO_image_fd;
 	char	*WE_image_filename;
-	int		WE_image_fd;
 	char	*EA_image_filename;
-	int		EA_image_fd;
-	int		floor_R;
-	int		floor_G;
-	int		floor_B;
-	int		celling_R;
-	int		celling_G;
-	int		celling_B;
+	int		*F_RGB;
+	int		*C_RGB;
 }	t_static;
 
 typedef struct s_data
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	struct s_static file_data;
+	char			*current_path;
+	struct s_static map_data;
 }	t_data;
+
+int parse_mapfile(char *filepath, t_data *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isable_strtonbr.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 01:38:57 by jekim             #+#    #+#             */
-/*   Updated: 2021/07/28 02:49:41 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/10/26 00:36:27 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** if the str is able to convert nbr type (int, long, long long us int...)
-** this function will returns 1, if not, 0.
+** this function will returns 0, if not, 1.
 */
 int	ft_isable_strtonbr(char *nbr)
 {
