@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:59:38 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/22 22:04:48 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/10/24 16:25:39 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	init_game(argc, argv, &data);
+	mlx_loop(data.mlx_ptr);
 	return (EXIT_SUCCESS);
 }
