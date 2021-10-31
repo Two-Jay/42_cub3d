@@ -97,8 +97,10 @@ int	parse_imagepath(int fd, char **ptr, char *key)
 	int		line_check;
 
 	line_check = ft_strgnl(fd, &line);
-	if (line_check != 1)
+	if (line_check != 1 && !ft_strequel(key, "NO"))
 		return (1);
+	while (line[0] == 0)
+		line_check = ft_strgnl(fd, &line);	
 	splited = get_and_check_splited(line, ' ', 2, key);
 	if (splited == NULL)
 		return (1);
@@ -129,8 +131,10 @@ char	**get_RGBstr(int fd, char *key)
 	int		line_check;
 
 	line_check = ft_strgnl(fd, &line);
-	if (line_check != 1)
+	if (line_check != 1 && !ft_strequel(key, "F"))
 		return (NULL);
+	while (line[0] == 0)
+		line_check = ft_strgnl(fd, &line);
 	splited = get_and_check_splited(line, ' ', 2, key);
 	if (splited == NULL)
 		return (NULL);
@@ -165,21 +169,6 @@ int	get_RGBvalue(char **parsed, t_data *data, char key)
 	return (0);
 }
 
-// i thought "in a strict order" means
-// a empty line must be there after the image paths
-// so, i made this function to skip the empty line
-// between RGB value line and that.
-int	skip_line(int map_fd)
-{
-	int		check;
-	char	*line;
-
-	check = ft_strgnl(map_fd, &line);
-	if (ft_strlen(line) > 1)
-		return (1);
-	return (0);
-}
-
 int	parse_all_RGBvalue(int map_fd, t_data *data)
 {
 	char	**rgb_parsed;
@@ -190,8 +179,6 @@ int	parse_all_RGBvalue(int map_fd, t_data *data)
 		return (1);
 	data->map_data.F_RGB[3] = '\0';
 	data->map_data.C_RGB[3] = '\0';
-	if (skip_line(map_fd))
-		return (1);
 	rgb_parsed = get_RGBstr(map_fd, "F");
 	if (rgb_parsed == NULL
 		|| get_RGBvalue(rgb_parsed, data, 'F'))
@@ -205,12 +192,12 @@ int	parse_all_RGBvalue(int map_fd, t_data *data)
 	return (0);
 }
 
-int	parse_mapdata(int map_fd, t_data *data)
-{
-	char **map_untouched;
+// int	parse_mapdata(int map_fd, t_data *data)
+// {
+// 	char **map_untouched;
 	
-	return (0);
-}
+// 	return (0);
+// }
 
 int	parse_mapfile(char *filepath, t_data *data)
 {

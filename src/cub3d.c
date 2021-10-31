@@ -44,6 +44,7 @@ int	main(int argc, char **argv, char **env)
 
 	get_current_path(env, &data);
 	init_game(argc, argv, &data);
-	mlx_loop(data.mlx_ptr);
+	printf("it would be right!\n");
+	// mlx_loop(data.mlx_ptr);
 	return (EXIT_SUCCESS);
 }
