@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/30 16:37:45 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/08 14:57:45 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ typedef struct s_static
 	char	*EA_image_filename;
 	int		*F_RGB;
 	int		*C_RGB;
+	t_list	*rawdata;
+	int		map_width;
+	int		map_hight;
 }	t_static;
 
 typedef struct s_data

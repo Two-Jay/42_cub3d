@@ -6,7 +6,7 @@
 #    By: jekim <arabi1549@naver.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/11 02:25:46 by jseo              #+#    #+#              #
-#    Updated: 2021/07/29 04:52:41 by jekim            ###   ########seoul.kr   #
+#    Updated: 2021/11/01 00:23:04 by jekim            ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ $(NAME):		$(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS)
 				@echo "\033[0;92m* $(NAME) was created *\033[0m"
 
 %.o : %.c
-	@$(CC) $(CCFLAG) $(INCLUDE) $< -c -o $@
+	@$(CC) $(CCFLAG) $< -c -o $@
 
 clean:
 				@$(RM) $(OBJS) $(BONUS_OBJS) $(PRINTF_OBJS)

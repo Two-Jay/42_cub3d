@@ -6,11 +6,18 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/10/30 16:34:56 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/10 00:09:54 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void skip_line(int fd, char **map_line, int *line_checker)
+{
+	*line_checker = ft_strgnl(fd, map_line);
+	while ((int)ft_strlen(*map_line) == 0)
+		*line_checker = ft_strgnl(fd, map_line);
+}
 
 char	*make_abspath(char *pwd, char *filepath, t_data *data)
 {
@@ -96,11 +103,9 @@ int	parse_imagepath(int fd, char **ptr, char *key)
 	char	**splited;
 	int		line_check;
 
-	line_check = ft_strgnl(fd, &line);
+	skip_line(fd, &line, &line_check);
 	if (line_check != 1 && !ft_strequel(key, "NO"))
 		return (1);
-	while (line[0] == 0)
-		line_check = ft_strgnl(fd, &line);	
 	splited = get_and_check_splited(line, ' ', 2, key);
 	if (splited == NULL)
 		return (1);
@@ -116,10 +121,6 @@ int	parse_all_imagepaths(int map_fd, t_data *data)
 		|| parse_imagepath(map_fd, &(data->map_data.WE_image_filename), "WE")
 		|| parse_imagepath(map_fd, &(data->map_data.EA_image_filename), "EA"))
 		return (1);
-	trs(data->map_data.NO_image_filename);
-	trs(data->map_data.SO_image_filename);
-	trs(data->map_data.WE_image_filename);
-	trs(data->map_data.EA_image_filename);
 	return (0);
 }
 
@@ -130,11 +131,7 @@ char	**get_RGBstr(int fd, char *key)
 	char	**rgb_arr;
 	int		line_check;
 
-	line_check = ft_strgnl(fd, &line);
-	if (line_check != 1 && !ft_strequel(key, "F"))
-		return (NULL);
-	while (line[0] == 0)
-		line_check = ft_strgnl(fd, &line);
+	skip_line(fd, &line, &line_check);
 	splited = get_and_check_splited(line, ' ', 2, key);
 	if (splited == NULL)
 		return (NULL);
@@ -192,12 +189,31 @@ int	parse_all_RGBvalue(int map_fd, t_data *data)
 	return (0);
 }
 
-// int	parse_mapdata(int map_fd, t_data *data)
-// {
-// 	char **map_untouched;
+int	parse_mapfile_rawdata(int map_fd, t_data *data)
+{
+	t_list	*lst;
+	int		line_check;
+	int		flag;
+	char	*map_line;
 	
-// 	return (0);
-// }
+	flag = 0;
+	lst = (t_list *)malloc(sizeof(t_list));
+	skip_line(map_fd, &map_line, &line_check);
+	while (line_check > 0)
+	{
+		if (map_line[0] != 0 && flag)
+			return (1);
+		printf("%s\n", map_line);
+		free(map_line);
+		line_check = ft_strgnl(map_fd, &map_line);
+		if (map_line[0] == 0)
+			flag++;
+	}
+	printf("%s\n", map_line);
+	free(map_line);
+	data->map_data.rawdata = lst;
+	return (0);
+}
 
 int	parse_mapfile(char *filepath, t_data *data)
 {
@@ -207,7 +223,8 @@ int	parse_mapfile(char *filepath, t_data *data)
 	if (map_fd == -1)
 		ft_strerr("Error : map file error\n");
 	if (parse_all_imagepaths(map_fd, data)
-		|| parse_all_RGBvalue(map_fd, data))
+		|| parse_all_RGBvalue(map_fd, data)
+		|| parse_mapfile_rawdata(map_fd, data))
 		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));
 	return (close(map_fd));
 }
