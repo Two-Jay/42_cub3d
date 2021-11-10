@@ -20,6 +20,7 @@ SRCDIR = ./src/
 LIBDIR = ./lib/libft/
 MLXDIR = ./lib/minilibx_opengl/
 LIBFT_DIR = ./lib/libft/
+PARSER_DIR = ./src/parser/
 MAPDIR = ./map/
 
 CCFLAG = -Wall -Wextra -Werror -g3
@@ -30,29 +31,35 @@ LIBFT = $(LIBFT_DIR)libft.a
 MINILIBX = $(MLXDIR)libmlx.dylib
 
 SRCFILE =	cub3d.c	\
-			mapparser.c \
-			mapparser_img.c	\
-			mapparser_mapdata.c \
-			mapparser_RGB.c \
-			mapparser_util.c \
-			mapparser_validator.c \
-			test_function.c \
+			test_function.c
+
+PARSER_FILE		=	mapparser.c \
+					mapparser_img.c	\
+					mapparser_mapdata.c \
+					mapparser_RGB.c \
+					mapparser_util.c \
+					mapparser_validator.c
 
 SRC_OBJ_FILE	=	$(SRCFILE:.c=.o)
 SRC_OBJ	=	$(addprefix $(OBJDIR), $(SRC_OBJ_FILE))
 
+PARSER_OBJ_FILE	=	$(PARSER_FILE:.c=.o)
+PARSER_OBJ	=	$(addprefix $(OBJDIR), $(PARSER_OBJ_FILE))
+
+
 all: $(NAME)
 
-
-
 $(OBJDIR)%.o : $(SRCDIR)%.c
-	@mkdir -p $(OBJDIR)
+	@mkdir -p obj
 	@$(CC) $(CCFLAG) $(INCLUDES) $< -c -o $@
 
-$(NAME)		:	$(SRC_OBJ)
+$(OBJDIR)%.o : $(PARSER_DIR)%.c
+	@$(CC) $(CCFLAG) $(INCLUDES) $< -c -o $@
+
+$(NAME)		:	$(SRC_OBJ) $(PARSER_OBJ)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(MLXDIR)
-	@$(CC) $(CCFLAG) $(SRC_OBJ) $(LIBFLAG) $(INCLUDES) -o $@
+	@$(CC) $(CCFLAG) $(SRC_OBJ) $(PARSER_OBJ) $(LIBFLAG) $(INCLUDES) -o $@
 	@echo "\033[0;92m* $(NAME) program file was created *\033[0m"
 
 clean:

@@ -6,11 +6,11 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:38:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 07:46:40 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/11 08:58:19 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int skip_line(int fd, char **map_line, int *line_checker)
 {

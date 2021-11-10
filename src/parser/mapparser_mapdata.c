@@ -6,11 +6,11 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:52:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 08:00:49 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/11 08:58:18 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static t_mapdata_lst	*append_mapdata_lst(char *line, t_mapdata_lst *lst)
 {

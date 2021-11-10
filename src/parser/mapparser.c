@@ -6,11 +6,11 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 08:19:50 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/11 08:58:49 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 char *get_abspath_prefix(char **env)
 {
@@ -63,8 +63,6 @@ int	run_mapfile(char *filepath, char **env)
 	if (!target_path)
 		return (-1);
 	fd_check = open(target_path, O_RDONLY, NULL);
-	trs(target_path);
-	tri(fd_check);
 	if (fd_check == -1)
 		return (-1);
 	return (fd_check);

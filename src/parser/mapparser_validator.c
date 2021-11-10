@@ -6,11 +6,11 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:56:03 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 08:02:45 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/11 08:58:20 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int validate_mapdata_border(char **map, t_data *data)
 {

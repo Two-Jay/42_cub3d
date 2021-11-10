@@ -6,11 +6,11 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:38:25 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 07:51:34 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/11 08:58:19 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static char	**get_RGBstr(int fd, char *key)
 {
