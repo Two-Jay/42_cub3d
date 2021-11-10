@@ -6,17 +6,26 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/10 13:37:47 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/10 14:13:39 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void skip_line(int fd, char **map_line, int *line_checker)
+int skip_line(int fd, char **map_line, int *line_checker)
 {
+	int cnt;
+
+	cnt = 0;
 	*line_checker = ft_strgnl(fd, map_line);
 	while ((int)ft_strlen(*map_line) == 0)
+	{
+		cnt++;
+		if (cnt == 512)
+			return (1);
 		*line_checker = ft_strgnl(fd, map_line);
+	}
+	return (0);
 }
 
 char	*make_abspath(char *pwd, char *filepath, t_data *data)
@@ -103,8 +112,8 @@ int	parse_imagepath(int fd, char **ptr, char *key)
 	char	**splited;
 	int		line_check;
 
-	skip_line(fd, &line, &line_check);
-	if (line_check != 1 && !ft_strequel(key, "NO"))
+	if (skip_line(fd, &line, &line_check)
+		|| (line_check != 1 && !ft_strequel(key, "NO")))
 		return (1);
 	splited = get_and_check_splited(line, ' ', 2, key);
 	if (splited == NULL)
@@ -131,7 +140,8 @@ char	**get_RGBstr(int fd, char *key)
 	char	**rgb_arr;
 	int		line_check;
 
-	skip_line(fd, &line, &line_check);
+	if (skip_line(fd, &line, &line_check))
+		return (NULL);
 	splited = get_and_check_splited(line, ' ', 2, key);
 	if (splited == NULL)
 		return (NULL);
@@ -221,26 +231,52 @@ int	parse_mapfile_rawdata(int map_fd, t_data *data)
 	t_mapdata_lst	*lst;
 	t_mapdata_lst	*head;
 	int				line_check;
-	int				flag;
 	char			*map_line;
 	
-	flag = 0;
 	lst = (t_mapdata_lst *)malloc(sizeof(t_mapdata_lst));
 	head = lst;
-	skip_line(map_fd, &map_line, &line_check);
-	while (line_check > 0 && !flag)
+	if (skip_line(map_fd, &map_line, &line_check))
+		return (1);
+	while (line_check > 0)
 	{
 		lst = append_mapdata_lst(map_line, lst);
 		if (!lst)
 			return (1);
 		line_check = ft_strgnl(map_fd, &map_line);
-		if (map_line[0] == 0)
-			flag++;
 	}
 	lst = append_mapdata_lst(map_line, lst);
 	if (!lst)
 		return (1);
 	data->map_data.rawdata = head;
+	return (0);
+}
+
+void get_width_and_height(t_data *data)
+{
+	t_mapdata_lst *lst;
+	int	current_width;
+	int max_width;
+	int	height;
+
+	current_width = 0;
+	max_width = 0;
+	height = 0;
+	lst = data->map_data.rawdata->next;
+	while (lst)
+	{
+		height++;
+		current_width = ft_strlen(lst->row);
+		if (max_width < current_width)
+			max_width = current_width;
+		lst = lst->next;
+	}
+	data->map_data.map_width = max_width;
+	data->map_data.map_height = height;
+}
+
+int convert_mapdata_matrix(t_data *data)
+{
+	get_width_and_height(data);
 	return (0);
 }
 
@@ -253,7 +289,8 @@ int	parse_mapfile(char *filepath, t_data *data)
 		ft_strerr("Error : map file error\n");
 	if (parse_all_imagepaths(map_fd, data)
 		|| parse_all_RGBvalue(map_fd, data)
-		|| parse_mapfile_rawdata(map_fd, data))
+		|| parse_mapfile_rawdata(map_fd, data)
+		|| convert_mapdata_matrix(data))
 		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));
 	return (close(map_fd));
 }

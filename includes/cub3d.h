@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/10 12:26:29 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/10 14:13:02 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_static
 	int						*F_RGB;
 	int						*C_RGB;
 	int						map_width;
-	int						map_hight;
+	int						map_height;
 	struct s_mapdata_lst	*rawdata;
 }	t_static;
 
