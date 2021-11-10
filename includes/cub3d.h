@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/10 14:13:02 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/10 15:09:02 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ typedef struct s_data
 	void			*mlx_ptr;
 	void			*win_ptr;
 	char			*current_path;
-	struct s_static map_data;
+	char			**map_matrix;
+	struct s_static parsed_data;
 }	t_data;
 
 int parse_mapfile(char *filepath, t_data *data);
