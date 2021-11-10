@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/10 15:12:04 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/10 16:14:25 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,27 @@ void get_width_and_height(t_data *data)
 	data->parsed_data.map_height = height;
 }
 
+char *malloc_row(char *row, int width)
+{
+	char *ret;
+	int	ix;
+	int	row_l;
+	
+	ix = 0;
+	row_l = ft_strlen(row);
+	ret = (char *)malloc(sizeof(char) * (width + 1));
+	if (!ret)
+		return (NULL);
+	ret[width] = '\0';
+	while (ix < width)
+	{
+		ret[ix] = ' ';
+		ix++;
+	}
+	ft_memmove(ret, row, row_l);
+	return (ret);
+}
+
 int convert_mapdata_matrix(t_data *data)
 {
 	char			**ret;
@@ -289,13 +310,62 @@ int convert_mapdata_matrix(t_data *data)
 	ret[data->parsed_data.map_height] = NULL;
 	while (++ix < data->parsed_data.map_height)
 	{
-		ret[ix] = ft_strdup(lst->row);
+		ret[ix] = malloc_row(lst->row, data->parsed_data.map_width);
 		if (!ret[ix])
 			return (1);
 		lst = lst->next;
 	}
 	data->map_matrix = ret;
 	return (0);
+}
+
+int clear_mapdata_lst(t_mapdata_lst *lst)
+{
+	t_mapdata_lst *tmp;
+
+	while (lst)
+	{
+		tmp = lst->next;
+		free(lst);
+		lst = tmp;
+	}
+	return (0);
+}
+
+int validate_mapdata_border(char **map, int height, int width)
+{
+	int ix;
+	int height;
+	int width;
+
+	ix = 0;
+	height = data->parsed_data.map_height;
+	width = data->parsed_data.map_width;
+	while (ix < width)
+	{
+		if (map[0][ix] == '0' || map[height - 1][ix] == '0')
+			return (1);
+		ix++;
+	}
+	ix = 0;
+	while (ix < height)
+	{
+		if (map[ix][0] == '0' || map[ix][width] == '0')
+			return (1);
+		ix++;
+	}
+	return (0);
+}
+
+int validate_mapdata_space(char **map, t_data *data)
+{
+	char ret;
+	int	ix;
+	int jx;
+
+	ix = 1;
+	jx = 1;
+	while ()
 }
 
 int	parse_mapfile(char *filepath, t_data *data)
@@ -309,7 +379,8 @@ int	parse_mapfile(char *filepath, t_data *data)
 		|| parse_all_RGBvalue(map_fd, data)
 		|| parse_mapfile_rawdata(map_fd, data)
 		|| convert_mapdata_matrix(data)
-		|| print_map_matrix(data))
+		|| validate_mapdata_border(data->map_matrix, data)
+		|| clear_mapdata_lst(data->parsed_data.rawdata))
 		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));
 	return (close(map_fd));
 }
