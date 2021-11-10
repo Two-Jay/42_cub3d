@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/10 17:04:38 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/11 08:13:38 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define tri(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%d\n", x); }
 # define trp(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%p\n", x); }
 
-# define SPACE_CHARSET "0NSEW"
+# define MAPTILE_CHARSET "0NSEW"
 
 typedef struct s_mapdata_lst
 {
@@ -36,10 +36,10 @@ typedef struct s_mapdata_lst
 
 typedef struct s_static
 {
-	char					*NO_image_filename;
-	char					*SO_image_filename;
-	char					*WE_image_filename;
-	char					*EA_image_filename;
+	char					*NO_img_filepath;
+	char					*SO_img_filepath;
+	char					*WE_img_filepath;
+	char					*EA_img_filepath;
 	int						*F_RGB;
 	int						*C_RGB;
 	int						map_width;
@@ -61,6 +61,20 @@ typedef struct s_data
 	struct s_static parsed_data;
 }	t_data;
 
-int parse_mapfile(char *filepath, t_data *data);
+int parse_mapfile(char *filepath, char** env, t_data *data);
+int	parse_all_RGBvalue(int map_fd, t_data *data);
+int	parse_all_imagepaths(int map_fd, t_data *data);
+int	parse_mapfile_rawdata(int map_fd, t_data *data);
+int convert_mapdata_matrix(t_data *data);
+int validate_mapdata_space(char **map, t_data *data);
+int validate_mapdata_object(t_data *data);
+int validate_mapdata_border(char **map, t_data *data);
+
+int skip_line(int fd, char **map_line, int *line_checker);
+void free_splited(char **splited);
+int	get_splited_len(char **splited);
+char **get_and_check_splited(char *src, char c, int check_l, char *key);
+
+void print_mapmatrix(char **map);
 
 #endif

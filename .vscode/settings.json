@@ -1,6 +1,11 @@
 {
 	"files.associations": {
 		"__config": "cpp",
-		"locale": "cpp"
+		"locale": "cpp",
+		"array": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c"
 	}
 }
