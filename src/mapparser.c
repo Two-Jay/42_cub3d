@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/10 16:14:25 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/10 17:04:53 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,20 +212,6 @@ t_mapdata_lst	*append_mapdata_lst(char *line, t_mapdata_lst *lst)
 	return (temp);
 }
 
-/*test function*/
-void print_lst(t_mapdata_lst *lst)
-{
-	t_mapdata_lst *trgt;
-
-	trgt = lst->next;
-	while (trgt)
-	{
-		printf("%s\n", trgt->row);
-		trgt = trgt->next;
-	}
-}
-
-
 int	parse_mapfile_rawdata(int map_fd, t_data *data)
 {
 	t_mapdata_lst	*lst;
@@ -332,7 +318,7 @@ int clear_mapdata_lst(t_mapdata_lst *lst)
 	return (0);
 }
 
-int validate_mapdata_border(char **map, int height, int width)
+int validate_mapdata_border(char **map, t_data *data)
 {
 	int ix;
 	int height;
@@ -357,15 +343,42 @@ int validate_mapdata_border(char **map, int height, int width)
 	return (0);
 }
 
+int check_mappoint(char **map, int ix, int jx)
+{
+	if (map[ix - 1][jx - 1] == ' '
+		|| map[ix - 1][jx] == ' '
+		|| map[ix - 1][jx + 1] == ' '
+		|| map[ix][jx - 1] == ' '
+		|| map[ix][jx + 1] == ' '
+		|| map[ix + 1][jx - 1] == ' '
+		|| map[ix + 1][jx] == ' '
+		|| map[ix + 1][jx + 1] == ' ')
+		return (1);
+	return (0);
+}
+
 int validate_mapdata_space(char **map, t_data *data)
 {
-	char ret;
+	int checker;
+	int space_cnt;
 	int	ix;
 	int jx;
 
 	ix = 1;
-	jx = 1;
-	while ()
+	while (ix < data->parsed_data.map_height - 1)
+	{
+		jx = 1;
+		while (jx < data->parsed_data.map_width - 1)
+		{
+			if (ft_strchr(SPACE_CHARSET, map[ix][jx]))
+				checker = check_mappoint(map, ix, jx);
+			if (checker)
+				return (1);
+			jx++;
+		}
+		ix++;
+	}
+	return (0);
 }
 
 int	parse_mapfile(char *filepath, t_data *data)
@@ -380,6 +393,7 @@ int	parse_mapfile(char *filepath, t_data *data)
 		|| parse_mapfile_rawdata(map_fd, data)
 		|| convert_mapdata_matrix(data)
 		|| validate_mapdata_border(data->map_matrix, data)
+		|| validate_mapdata_space(data->map_matrix, data)
 		|| clear_mapdata_lst(data->parsed_data.rawdata))
 		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));
 	return (close(map_fd));

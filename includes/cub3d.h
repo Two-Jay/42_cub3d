@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/10 15:09:02 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/10 17:04:38 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define tri(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%d\n", x); }
 # define trp(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%p\n", x); }
 
+# define SPACE_CHARSET "0NSEW"
+
 typedef struct s_mapdata_lst
 {
 	char *row;
@@ -42,6 +44,11 @@ typedef struct s_static
 	int						*C_RGB;
 	int						map_width;
 	int						map_height;
+	int						space_cnt;
+	int						N_cnt;
+	int						S_cnt;
+	int						E_cnt;
+	int						W_cnt;
 	struct s_mapdata_lst	*rawdata;
 }	t_static;
 
