@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/08 14:57:45 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/10 12:26:29 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,23 @@
 # define tri(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%d\n", x); }
 # define trp(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%p\n", x); }
 
-typedef enum s_maptile_type
+typedef struct s_mapdata_lst
 {
-	NON = 0,
-	WALL,
-	PLYR,
-	FLR,
-	SPRT
-}	t_maptile_type;
+	char *row;
+	struct s_mapdata_lst	*next;
+}	t_mapdata_lst;
 
 typedef struct s_static
 {
-	char	*NO_image_filename;
-	char	*SO_image_filename;
-	char	*WE_image_filename;
-	char	*EA_image_filename;
-	int		*F_RGB;
-	int		*C_RGB;
-	t_list	*rawdata;
-	int		map_width;
-	int		map_hight;
+	char					*NO_image_filename;
+	char					*SO_image_filename;
+	char					*WE_image_filename;
+	char					*EA_image_filename;
+	int						*F_RGB;
+	int						*C_RGB;
+	int						map_width;
+	int						map_hight;
+	struct s_mapdata_lst	*rawdata;
 }	t_static;
 
 typedef struct s_data

@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/10 00:09:54 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/10 13:37:47 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,29 +189,58 @@ int	parse_all_RGBvalue(int map_fd, t_data *data)
 	return (0);
 }
 
+t_mapdata_lst	*append_mapdata_lst(char *line, t_mapdata_lst *lst)
+{
+	t_mapdata_lst *temp;
+	
+	temp = (t_mapdata_lst *)malloc(sizeof(t_mapdata_lst));
+	if (!temp)
+		return (NULL);
+	temp->row = ft_strdup(line);
+	lst->next = temp;
+	free(line);
+	return (temp);
+}
+
+/*test function*/
+void print_lst(t_mapdata_lst *lst)
+{
+	t_mapdata_lst *trgt;
+
+	trgt = lst->next;
+	while (trgt)
+	{
+		printf("%s\n", trgt->row);
+		trgt = trgt->next;
+	}
+}
+
+
 int	parse_mapfile_rawdata(int map_fd, t_data *data)
 {
-	t_list	*lst;
-	int		line_check;
-	int		flag;
-	char	*map_line;
+	t_mapdata_lst	*lst;
+	t_mapdata_lst	*head;
+	int				line_check;
+	int				flag;
+	char			*map_line;
 	
 	flag = 0;
-	lst = (t_list *)malloc(sizeof(t_list));
+	lst = (t_mapdata_lst *)malloc(sizeof(t_mapdata_lst));
+	head = lst;
 	skip_line(map_fd, &map_line, &line_check);
-	while (line_check > 0)
+	while (line_check > 0 && !flag)
 	{
-		if (map_line[0] != 0 && flag)
+		lst = append_mapdata_lst(map_line, lst);
+		if (!lst)
 			return (1);
-		printf("%s\n", map_line);
-		free(map_line);
 		line_check = ft_strgnl(map_fd, &map_line);
 		if (map_line[0] == 0)
 			flag++;
 	}
-	printf("%s\n", map_line);
-	free(map_line);
-	data->map_data.rawdata = lst;
+	lst = append_mapdata_lst(map_line, lst);
+	if (!lst)
+		return (1);
+	data->map_data.rawdata = head;
 	return (0);
 }
 
