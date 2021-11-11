@@ -18,20 +18,22 @@ INCDIR = ./includes/
 OBJDIR = ./obj/
 SRCDIR = ./src/
 LIBDIR = ./lib/libft/
-MLXDIR = ./lib/minilibx_opengl/
+MLXDIR = ./lib/minilibx_mms_20210621/
 LIBFT_DIR = ./lib/libft/
 PARSER_DIR = ./src/parser/
 MAPDIR = ./map/
 
 CCFLAG = -Wall -Wextra -Werror -g3
-LIBFLAG = -lmlx -lm -lft -L$(LIBFT_DIR) -L$(MLXDIR) -framework OpenGL -framework AppKit
+LIBFLAG_OPENGL = -lmlx -lm -lft -L$(LIBFT_DIR) -L$(MLXDIR) -framework OpenGL -framework AppKit
+LIBFLAG = -lmlx -lft -L$(LIBFT_DIR) -L$(MLXDIR) -framework OpenGL -framework Appkit -lz
 INCLUDES = -I$(HEAD_DIR) -I$(LIBFT_DIR) -I$(MLXDIR)
 
 LIBFT = $(LIBFT_DIR)libft.a
 MINILIBX = $(MLXDIR)libmlx.dylib
 
 SRCFILE =	cub3d.c	\
-			test_function.c
+			test_function.c	\
+			hooks.c
 
 PARSER_FILE		=	mapparser.c \
 					mapparser_img.c	\
@@ -60,12 +62,14 @@ $(NAME)		:	$(SRC_OBJ) $(PARSER_OBJ)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(MLXDIR)
 	@$(CC) $(CCFLAG) $(SRC_OBJ) $(PARSER_OBJ) $(LIBFLAG) $(INCLUDES) -o $@
+	@ln -s ./lib/minilibx_mms_20210621/libmlx.dylib ./libmlx.dylib
 	@echo "\033[0;92m* $(NAME) program file was created *\033[0m"
 
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@$(MAKE) -C $(MLXDIR) clean
 	@rm -rf $(OBJDIR)
+	@rm libmlx.dylib
 
 fclean: clean
 	@rm -f $(MINILIBX)

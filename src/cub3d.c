@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:59:38 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 08:20:15 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/11 20:27:39 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **env)
 
 	init_game(argc, argv, env, &data);
 	print_mapmatrix((&data)->map_matrix);
-	printf("it would be right!\n");
-	// mlx_loop(data.mlx_ptr);
+	set_hooks(&data);
+	mlx_loop((&data)->mlx_ptr);
 	return (EXIT_SUCCESS);
 }

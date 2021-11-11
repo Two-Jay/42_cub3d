@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 08:13:38 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/11 20:13:52 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <math.h>
 # include "../lib/libft/libft.h"
-# include "../lib/minilibx_opengl/mlx.h"
+# include "../lib/minilibx_mms_20210621/mlx.h"
 
 # define trs(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%s\n", x); }
 # define trc(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%c\n", x); }
@@ -61,6 +61,9 @@ typedef struct s_data
 	struct s_static parsed_data;
 }	t_data;
 
+/*
+**	parser_part
+*/
 int parse_mapfile(char *filepath, char** env, t_data *data);
 int	parse_all_RGBvalue(int map_fd, t_data *data);
 int	parse_all_imagepaths(int map_fd, t_data *data);
@@ -75,6 +78,14 @@ void free_splited(char **splited);
 int	get_splited_len(char **splited);
 char **get_and_check_splited(char *src, char c, int check_l, char *key);
 
+/*
+**	hooks_part
+*/
+void set_hooks(t_data *data);
+
+/*
+**	test_function
+*/
 void print_mapmatrix(char **map);
 
 #endif
