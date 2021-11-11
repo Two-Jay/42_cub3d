@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 20:13:52 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/11 23:37:55 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 # define trp(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%p\n", x); }
 
 # define MAPTILE_CHARSET "0NSEW"
+
+# define BUTTON_REDCROSS 100
+# define KEY_ESC 0x35
+# define KEY_W 0xd
+# define KEY_S 0x1
+# define KEY_A 0x0
+# define KEY_D 0x2
 
 typedef struct s_mapdata_lst
 {
@@ -52,12 +59,19 @@ typedef struct s_static
 	struct s_mapdata_lst	*rawdata;
 }	t_static;
 
+typedef struct	s_window
+{
+	int 			resol_max_x;
+	int 			resol_max_y;
+	void			*win_ptr;
+}	t_window;
+
 typedef struct s_data
 {
 	void			*mlx_ptr;
-	void			*win_ptr;
 	char			*current_path;
 	char			**map_matrix;
+	struct s_window	window;
 	struct s_static parsed_data;
 }	t_data;
 
