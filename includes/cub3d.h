@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 23:37:55 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/12 00:10:22 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 # define MAPTILE_CHARSET "0NSEW"
 
-# define BUTTON_REDCROSS 100
+# define BUTTON_REDCROSS 0x6d357408
 # define KEY_ESC 0x35
 # define KEY_W 0xd
 # define KEY_S 0x1

@@ -6,22 +6,27 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:08:01 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 23:37:32 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/12 00:11:32 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-
-void subcallback_press_esc(t_data *data)
+int subcallback_exit(void *dt)
 {
+	t_data *data;
+
+	data = (t_data *)dt;	
 	mlx_destroy_window(data->mlx_ptr, data->window.win_ptr);
 	exit(0);
+	return (0);
 }
 
-int subcallback_press_move(int code, t_data *data)
+int subcallback_press_move(int code, void *dt)
 {
-	(void)data;
+	t_data *data;
+
+	data = (t_data *)dt;
 	if (code == KEY_W)
 		printf ("cub3d : pressed W %d / key\n", code);
 	if (code == KEY_A)
@@ -35,18 +40,13 @@ int subcallback_press_move(int code, t_data *data)
 
 int callback_key(int code, void *dt)
 {
-	t_data *data;
-
-	data = (t_data *)dt;
 	ft_printf("cub3d : pressed %x / key\n", code);
 	if (code == KEY_W || code == KEY_A || code == KEY_S || code == KEY_D)
-		subcallback_press_move(code, data);
+		subcallback_press_move(code, dt);
 	if (code == KEY_ESC)
-		subcallback_press_esc(data);
+		subcallback_exit(dt);
 	return (0);
 }
-
-
 
 int callback_mouse(int code, int x, int y, char *str)
 {
@@ -71,5 +71,6 @@ void set_hooks(t_data *data)
 	mlx_mouse_hook(data->window.win_ptr, &callback_mouse, "mouse");
 	mlx_key_hook(data->window.win_ptr, &callback_key, (void *)data);
 	mlx_expose_hook(data->window.win_ptr, &callback_expose, "expose");
+	mlx_hook(data->window.win_ptr, 17, 0, &subcallback_exit, (void *)data);
 	// mlx_loop_hook(data->mlx_ptr, &callback_hook, "loop");
 }

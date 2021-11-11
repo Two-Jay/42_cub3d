@@ -69,7 +69,7 @@ clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@$(MAKE) -C $(MLXDIR) clean
 	@rm -rf $(OBJDIR)
-	@rm libmlx.dylib
+	@rm -rf libmlx.dylib
 
 fclean: clean
 	@rm -f $(MINILIBX)
