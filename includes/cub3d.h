@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/14 00:19:29 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/14 00:29:02 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ int	parse_all_RGBvalue(int map_fd, t_data *data);
 int	parse_all_imagepaths(int map_fd, t_data *data);
 int	parse_mapfile_rawdata(int map_fd, t_data *data);
 int convert_mapdata_matrix(t_data *data);
-int validate_mapdata_space(char **map, t_data *data);
+int validate_mapdata_space(int **map, t_data *data);
 int validate_mapdata_object(t_data *data);
-int validate_mapdata_border(char **map, t_data *data);
+int validate_mapdata_border(int **map, t_data *data);
 
 int skip_line(int fd, char **map_line, int *line_checker);
 void free_splited(char **splited);
