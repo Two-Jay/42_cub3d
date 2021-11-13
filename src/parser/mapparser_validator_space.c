@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 00:57:04 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/14 00:57:13 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/14 01:27:57 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int validate_mapdata_space(int **map, t_data *data)
 			count_space_type(map[ix][jx], data);
 			if (map[ix][jx] != 0 && map[ix][jx] != 2) 
 				checker = check_mappoint(map, ix, jx);
+			if (map[ix][jx] == 3)
+			{
+				data->player.pos_x = (double)jx;
+				data->player.pos_y = (double)ix;
+			}
 			if (checker)
 				return (1);
 			jx++;

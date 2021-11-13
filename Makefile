@@ -34,6 +34,7 @@ MINILIBX = $(MLXDIR)libmlx.dylib
 
 SRCFILE =	cub3d.c	\
 			test_function.c	\
+			init.c \
 			hooks.c
 
 PARSER_FILE		=	mapparser.c \

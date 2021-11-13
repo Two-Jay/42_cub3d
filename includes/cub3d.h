@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/14 00:55:18 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/14 01:22:31 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # define tri(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%d\n", x); }
 # define trp(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%p\n", x); }
 
-# define MAPTILE_CHARSET "0NSEW"
-
 # define BUTTON_REDCROSS 0x6d357408
 # define KEY_ESC 0x35
 # define KEY_W 0xd
@@ -43,8 +41,8 @@ typedef struct s_mapdata_lst
 
 typedef struct s_player
 {
-	int pos_x;
-	int pos_y;
+	double pos_x;
+	double pos_y;
 	int	health;
 	int	speed;
 	int armo;
@@ -83,9 +81,16 @@ typedef struct s_data
 	void			*main_image_ptr;
 	char			*current_path;
 	int				**map_matrix;
+	struct s_player player;
 	struct s_window	window;
 	struct s_static parsed_data;
 }	t_data;
+
+
+/*
+**	initiation_part
+*/
+int init_game(int argc, char **argv, char **env, t_data *data);
 
 /*
 **	parser_part
