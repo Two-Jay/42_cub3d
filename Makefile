@@ -21,6 +21,7 @@ LIBDIR = ./lib/libft/
 MLXDIR = ./lib/minilibx_mms_20210621/
 LIBFT_DIR = ./lib/libft/
 PARSER_DIR = ./src/parser/
+ENGINE_DIR = ./src/engine/
 MAPDIR = ./map/
 
 CCFLAG = -Wall -Wextra -Werror -g3
@@ -42,12 +43,17 @@ PARSER_FILE		=	mapparser.c \
 					mapparser_util.c \
 					mapparser_validator.c
 
+ENGINE_FILE		=	draw.c 
+
+
 SRC_OBJ_FILE	=	$(SRCFILE:.c=.o)
 SRC_OBJ	=	$(addprefix $(OBJDIR), $(SRC_OBJ_FILE))
 
 PARSER_OBJ_FILE	=	$(PARSER_FILE:.c=.o)
 PARSER_OBJ	=	$(addprefix $(OBJDIR), $(PARSER_OBJ_FILE))
 
+ENGINR_OBJ_FILE	=	$(ENGINE_FILE:.c=.o)
+ENGINE_OBJ	=	$(addprefix $(OBJDIR), $(ENGINR_OBJ_FILE))
 
 all: $(NAME)
 
@@ -58,10 +64,13 @@ $(OBJDIR)%.o : $(SRCDIR)%.c
 $(OBJDIR)%.o : $(PARSER_DIR)%.c
 	@$(CC) $(CCFLAG) $(INCLUDES) $< -c -o $@
 
-$(NAME)		:	$(SRC_OBJ) $(PARSER_OBJ)
+$(OBJDIR)%.o : $(ENGINE_DIR)%.c
+	@$(CC) $(CCFLAG) $(INCLUDES) $< -c -o $@
+
+$(NAME)		:	$(SRC_OBJ) $(PARSER_OBJ) $(ENGINE_OBJ)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(MLXDIR)
-	@$(CC) $(CCFLAG) $(SRC_OBJ) $(PARSER_OBJ) $(LIBFLAG) $(INCLUDES) -o $@
+	@$(CC) $(CCFLAG) $(SRC_OBJ) $(PARSER_OBJ) $(ENGINE_OBJ) $(LIBFLAG) $(INCLUDES) -o $@
 	@ln -s ./lib/minilibx_mms_20210621/libmlx.dylib ./libmlx.dylib
 	@echo "\033[0;92m* $(NAME) program file was created *\033[0m"
 

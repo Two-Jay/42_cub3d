@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_function.c                                    :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/11 07:47:50 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/14 00:19:18 by jekim            ###   ########seoul.kr  */
+/*   Created: 2021/11/12 17:11:17 by jekim             #+#    #+#             */
+/*   Updated: 2021/11/13 10:51:09 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-void print_mapmatrix(int **map, t_data *data)
+int draw(void)
 {
-	int ix;
-	int jx;
-	
-	ix = 0;
-	while (ix < data->parsed_data.map_height)
-	{
-		jx = 0;
-		while (jx < data->parsed_data.map_width)
-		{
-			printf("%d", map[ix][jx]);
-			jx++;
-		}
-		printf("\n");
-		ix++;
-	}
+    printf("draw_test\n");
+    return (0);
 }

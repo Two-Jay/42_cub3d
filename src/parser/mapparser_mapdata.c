@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:52:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 08:58:18 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/14 00:20:22 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,37 +73,55 @@ static void get_width_and_height(t_data *data)
 	data->parsed_data.map_height = height;
 }
 
-static char *malloc_mapdata_row(char *row, int width)
+static void fill_maptile_row(int *arr, char *row, int size)
 {
-	char *ret;
+	int ix;
+
+	ix = 0;
+	while (ix < size)
+	{
+		if (row[ix] == ' ')
+			arr[ix] = 0;
+		if (row[ix] == '0')
+			arr[ix] = 1;
+		else if (row[ix] == '1')
+			arr[ix] = 2;
+		else if (row[ix] == 'N')
+			arr[ix] = 3;
+		else if (row[ix] == 'S')
+			arr[ix] = 4;
+		ix++;
+	}
+}
+
+// 여기서 컨버팅 들어가야함
+static int *malloc_mapdata_row(char *row, int width)
+{
+	int *ret;
 	int	ix;
 	int	row_l;
 	
 	ix = 0;
 	row_l = ft_strlen(row);
-	ret = (char *)malloc(sizeof(char) * (width + 1));
+	ret = (int *)malloc(sizeof(int) * (width + 1));
 	if (!ret)
 		return (NULL);
 	ret[width] = '\0';
-	while (ix < width)
-	{
-		ret[ix] = ' ';
-		ix++;
-	}
-	ft_memmove(ret, row, row_l);
+	fill_maptile_row(ret, row, row_l);
 	return (ret);
 }
 
+//맵 파싱을 char **기반에서 enum maptile **기반으로
 int convert_mapdata_matrix(t_data *data)
 {
-	char			**ret;
+	int				**ret;
 	t_mapdata_lst	*lst;
 	int				ix;
 
 	ix = -1;
 	get_width_and_height(data);
 	lst = data->parsed_data.rawdata->next;
-	ret = (char **)malloc(sizeof(char *) * (data->parsed_data.map_height + 1));
+	ret = (int **)malloc(sizeof(int *) * (data->parsed_data.map_height + 1));
 	if (!ret)
 		return (1);
 	ret[data->parsed_data.map_height] = NULL;

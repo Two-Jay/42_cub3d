@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/12 00:10:22 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/14 00:19:29 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ typedef struct s_mapdata_lst
 	struct s_mapdata_lst	*next;
 }	t_mapdata_lst;
 
+typedef struct s_player
+{
+	int pos_x;
+	int pos_y;
+}	t_player;
+
 typedef struct s_static
 {
 	char					*NO_img_filepath;
@@ -63,14 +69,17 @@ typedef struct	s_window
 {
 	int 			resol_max_x;
 	int 			resol_max_y;
+	int				resol_basic_x;
+	int				resol_basic_y;
 	void			*win_ptr;
 }	t_window;
 
 typedef struct s_data
 {
 	void			*mlx_ptr;
+	void			*main_image_ptr;
 	char			*current_path;
-	char			**map_matrix;
+	int				**map_matrix;
 	struct s_window	window;
 	struct s_static parsed_data;
 }	t_data;
@@ -98,8 +107,13 @@ char **get_and_check_splited(char *src, char c, int check_l, char *key);
 void set_hooks(t_data *data);
 
 /*
+**	engine_part
+*/
+int	draw(void);
+
+/*
 **	test_function
 */
-void print_mapmatrix(char **map);
+void print_mapmatrix(int **map, t_data *data);
 
 #endif

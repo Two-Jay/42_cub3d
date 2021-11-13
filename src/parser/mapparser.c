@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 08:58:49 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/14 00:00:22 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,6 @@ int	parse_mapfile(char *filepath, char **env, t_data *data)
 		|| parse_all_RGBvalue(map_fd, data)
 		|| parse_mapfile_rawdata(map_fd, data)
 		|| convert_mapdata_matrix(data)
-		|| validate_mapdata_border(data->map_matrix, data)
-		|| validate_mapdata_space(data->map_matrix, data)
-		|| validate_mapdata_object(data)
 		|| clear_mapdata_lst(data->parsed_data.rawdata))
 		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));
 	return (close(map_fd));
