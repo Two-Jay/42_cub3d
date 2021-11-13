@@ -39,9 +39,11 @@ SRCFILE =	cub3d.c	\
 PARSER_FILE		=	mapparser.c \
 					mapparser_img.c	\
 					mapparser_mapdata.c \
+					mapparser_mapdata_lst.c \
 					mapparser_RGB.c \
 					mapparser_util.c \
-					mapparser_validator.c
+					mapparser_validator.c \
+					mapparser_validator_space.c 
 
 ENGINE_FILE		=	draw.c 
 
