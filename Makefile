@@ -23,6 +23,7 @@ LIBFT_DIR = ./lib/libft/
 PARSER_DIR = ./src/parser/
 ENGINE_DIR = ./src/engine/
 MAPDIR = ./map/
+SANIT = -fsanitize=address
 
 CCFLAG = -Wall -Wextra -Werror -g3
 LIBFLAG_OPENGL = -lmlx -lm -lft -L$(LIBFT_DIR) -L$(MLXDIR) -framework OpenGL -framework AppKit
@@ -73,7 +74,7 @@ $(OBJDIR)%.o : $(ENGINE_DIR)%.c
 $(NAME)		:	$(SRC_OBJ) $(PARSER_OBJ) $(ENGINE_OBJ)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(MLXDIR)
-	@$(CC) $(CCFLAG) $(SRC_OBJ) $(PARSER_OBJ) $(ENGINE_OBJ) $(LIBFLAG) $(INCLUDES) -o $@
+	@$(CC) $(CCFLAG) $(SRC_OBJ) $(PARSER_OBJ) $(ENGINE_OBJ) $(SANIT) $(LIBFLAG) $(INCLUDES) -o $@
 	@ln -s ./lib/minilibx_mms_20210621/libmlx.dylib ./libmlx.dylib
 	@echo "\033[0;92m* $(NAME) program file was created *\033[0m"
 

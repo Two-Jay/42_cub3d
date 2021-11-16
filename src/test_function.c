@@ -6,13 +6,13 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:47:50 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/14 00:19:18 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/16 19:04:48 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void print_mapmatrix(int **map, t_data *data)
+int print_mapmatrix(int **map, t_data *data)
 {
 	int ix;
 	int jx;
@@ -29,4 +29,5 @@ void print_mapmatrix(int **map, t_data *data)
 		printf("\n");
 		ix++;
 	}
+	return (0);
 }

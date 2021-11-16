@@ -6,44 +6,21 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:52:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/14 00:55:06 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/16 18:53:54 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void get_width_and_height(t_data *data)
-{
-	t_mapdata_lst *lst;
-	int	current_width;
-	int max_width;
-	int	height;
-
-	current_width = 0;
-	max_width = 0;
-	height = 0;
-	lst = data->parsed_data.rawdata->next;
-	while (lst)
-	{
-		height++;
-		current_width = ft_strlen(lst->row);
-		if (max_width < current_width)
-			max_width = current_width;
-		lst = lst->next;
-	}
-	data->parsed_data.map_width = max_width;
-	data->parsed_data.map_height = height;
-}
-
 static void fill_maptile_row(int *arr, char *row, int size)
 {
 	int ix;
+	int row_l;
 
 	ix = 0;
+	row_l = ft_strlen(row);
 	while (ix < size)
 	{
-		if (row[ix] == ' ')
-			arr[ix] = 0;
 		if (row[ix] == '0')
 			arr[ix] = 1;
 		else if (row[ix] == '1')
@@ -64,7 +41,7 @@ static int *malloc_mapdata_row(char *row, int width)
 	
 	ix = 0;
 	row_l = ft_strlen(row);
-	ret = (int *)malloc(sizeof(int) * (width + 1));
+	ret = (int *)ft_calloc(sizeof(int), (width + 1));
 	if (!ret)
 		return (NULL);
 	ret[width] = '\0';
@@ -79,7 +56,6 @@ int convert_mapdata_matrix(t_data *data)
 	int				ix;
 
 	ix = -1;
-	get_width_and_height(data);
 	lst = data->parsed_data.rawdata->next;
 	ret = (int **)malloc(sizeof(int *) * (data->parsed_data.map_height + 1));
 	if (!ret)

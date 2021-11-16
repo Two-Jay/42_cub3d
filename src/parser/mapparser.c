@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/14 00:35:50 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/16 19:17:25 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,15 @@ int	run_mapfile(char *filepath, char **env)
 	return (fd_check);
 }
 
-int clear_mapdata_lst(t_mapdata_lst *lst)
+int clear_mapdata_lst(t_mapdata_lst *lst, t_data *data)
 {
-	t_mapdata_lst *tmp;
+	t_mapdata_lst	*tmp;
+	int				ix;
 
-	while (lst)
+	ix = 0;
+	while (ix < data->parsed_data.map_height)
 	{
+		ix++;
 		tmp = lst->next;
 		free(lst);
 		lst = tmp;
@@ -95,7 +98,8 @@ int	parse_mapfile(char *filepath, char **env, t_data *data)
 		|| validate_mapdata_border(data->map_matrix, data)
 		|| validate_mapdata_space(data->map_matrix, data)
 		|| validate_mapdata_object(data)
-		|| clear_mapdata_lst(data->parsed_data.rawdata))
+		|| clear_mapdata_lst(data->parsed_data.rawdata, data))
 		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));
 	return (close(map_fd));
 }
+

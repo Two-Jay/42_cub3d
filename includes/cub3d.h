@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/14 01:22:31 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/16 18:50:16 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,6 @@ int	draw(void);
 /*
 **	test_function
 */
-void print_mapmatrix(int **map, t_data *data);
+int print_mapmatrix(int **map, t_data *data);
 
 #endif
