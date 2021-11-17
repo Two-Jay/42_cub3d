@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/16 18:50:16 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/17 14:27:01 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void set_hooks(t_data *data);
 /*
 **	engine_part
 */
-int	draw(void);
+int	render(t_data *data);
 
 /*
 **	test_function

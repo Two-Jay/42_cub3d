@@ -6,14 +6,15 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 17:11:17 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/13 10:51:09 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/17 14:26:53 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int draw(void)
+int render(t_data *data)
 {
+    (void)data;
     printf("draw_test\n");
     return (0);
 }
