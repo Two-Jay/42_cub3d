@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/16 19:17:25 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/21 00:34:55 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int clear_mapdata_lst(t_mapdata_lst *lst, t_data *data)
 	int				ix;
 
 	ix = 0;
-	while (ix < data->parsed_data.map_height)
+	while (ix < data->parsed_data->map_height)
 	{
 		ix++;
 		tmp = lst->next;
@@ -98,7 +98,7 @@ int	parse_mapfile(char *filepath, char **env, t_data *data)
 		|| validate_mapdata_border(data->map_matrix, data)
 		|| validate_mapdata_space(data->map_matrix, data)
 		|| validate_mapdata_object(data)
-		|| clear_mapdata_lst(data->parsed_data.rawdata, data))
+		|| clear_mapdata_lst(data->parsed_data->rawdata, data))
 		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));
 	return (close(map_fd));
 }

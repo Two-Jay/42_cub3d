@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:04:29 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/21 00:38:26 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_data
 /*
 **	initiation_part
 */
-int init_game(int argc, char **argv, char **env, t_data *data);
+int init_game(int argc, char **argv, char **env, t_data **data);
 
 /*
 **	parser_part
@@ -123,6 +123,7 @@ int	render(t_data *data);
 /*
 **	test_function
 */
+int check_struct_p(t_data *data);
 int print_mapmatrix(int **map, t_data *data);
 
 #endif

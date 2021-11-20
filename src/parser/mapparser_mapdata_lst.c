@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser_mapdata_lst.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 00:54:43 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/16 19:12:28 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/21 00:17:23 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int	get_max_width_mapdata(t_data *data)
 	ix = 0;
 	current_width = 0;
 	max_width = 0;
-	lst = data->parsed_data.rawdata->next;
-	while (ix < data->parsed_data.map_height)
+	lst = data->parsed_data->rawdata->next;
+	while (ix < data->parsed_data->map_height)
 	{
 		current_width = ft_strlen(lst->row);
 		if (max_width < current_width)
@@ -54,7 +54,7 @@ int	parse_mapfile_rawdata(int map_fd, t_data *data)
 	int				line_check;
 	char			*map_line;
 
-	data->parsed_data.map_height = 0;
+	data->parsed_data->map_height = 0;
 	lst = (t_mapdata_lst *)malloc(sizeof(t_mapdata_lst));
 	head = lst;
 	if (skip_line(map_fd, &map_line, &line_check))
@@ -64,14 +64,14 @@ int	parse_mapfile_rawdata(int map_fd, t_data *data)
 		lst = append_mapdata_lst(map_line, lst);
 		if (!lst)
 			return (1);
-		data->parsed_data.map_height++;
+		data->parsed_data->map_height++;
 		line_check = ft_strgnl(map_fd, &map_line);
 	}
 	lst = append_mapdata_lst(map_line, lst);
 	if (!lst)
 		return (1);
-	data->parsed_data.map_height++;
-	data->parsed_data.rawdata = head;
-	data->parsed_data.map_width = get_max_width_mapdata(data);
+	data->parsed_data->map_height++;
+	data->parsed_data->rawdata = head;
+	data->parsed_data->map_width = get_max_width_mapdata(data);
 	return (0);
 }

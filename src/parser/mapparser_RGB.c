@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser_RGB.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:38:25 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 08:58:19 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/21 00:17:59 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static int	get_RGBvalue(char **parsed, t_data *data, char key)
 		if (ovf_flag == 1 || value < 0 || value > 255)
 			return (1);
 		if (key == 'F')
-			data->parsed_data.F_RGB[ix] = value;
+			data->parsed_data->F_RGB[ix] = value;
 		if (key == 'C')
-			data->parsed_data.C_RGB[ix] = value;
+			data->parsed_data->C_RGB[ix] = value;
 		ix++;
 	}
 	return (0);
@@ -59,12 +59,12 @@ int	parse_all_RGBvalue(int map_fd, t_data *data)
 {
 	char	**rgb_parsed;
 
-	data->parsed_data.F_RGB = (int *)malloc(sizeof(int) * 4);
-	data->parsed_data.C_RGB = (int *)malloc(sizeof(int) * 4);
-	if (!data->parsed_data.F_RGB || !data->parsed_data.C_RGB)
+	data->parsed_data->F_RGB = (int *)malloc(sizeof(int) * 4);
+	data->parsed_data->C_RGB = (int *)malloc(sizeof(int) * 4);
+	if (!data->parsed_data->F_RGB || !data->parsed_data->C_RGB)
 		return (1);
-	data->parsed_data.F_RGB[3] = '\0';
-	data->parsed_data.C_RGB[3] = '\0';
+	data->parsed_data->F_RGB[3] = '\0';
+	data->parsed_data->C_RGB[3] = '\0';
 	rgb_parsed = get_RGBstr(map_fd, "F");
 	if (rgb_parsed == NULL
 		|| get_RGBvalue(rgb_parsed, data, 'F'))

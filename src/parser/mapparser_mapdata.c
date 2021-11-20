@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser_mapdata.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:52:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/16 18:53:54 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/21 00:39:20 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ int convert_mapdata_matrix(t_data *data)
 	int				ix;
 
 	ix = -1;
-	lst = data->parsed_data.rawdata->next;
-	ret = (int **)malloc(sizeof(int *) * (data->parsed_data.map_height + 1));
+	lst = data->parsed_data->rawdata->next;
+	ret = (int **)malloc(sizeof(int *) * (data->parsed_data->map_height + 1));
 	if (!ret)
 		return (1);
-	ret[data->parsed_data.map_height] = NULL;
-	while (++ix < data->parsed_data.map_height)
+	ret[data->parsed_data->map_height] = NULL;
+	while (++ix < data->parsed_data->map_height)
 	{
-		ret[ix] = malloc_mapdata_row(lst->row, data->parsed_data.map_width);
+		ret[ix] = malloc_mapdata_row(lst->row, data->parsed_data->map_width);
 		if (!ret[ix])
 			return (1);
 		lst = lst->next;

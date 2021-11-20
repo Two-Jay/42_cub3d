@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser_validator_space.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 00:57:04 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/14 01:27:57 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/21 00:18:52 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,24 @@ static int check_mappoint(int **map, int ix, int jx)
 static void count_space_type(int point, t_data *data)
 {
 	if (point == 1)
-		data->parsed_data.space_cnt++;
+		data->parsed_data->space_cnt++;
 	else if (point == 3)
-		data->parsed_data.N_cnt++;
+		data->parsed_data->N_cnt++;
 	else if (point == 4)
-		data->parsed_data.S_cnt++;
+		data->parsed_data->S_cnt++;
 	else if (point == 5)
-		data->parsed_data.E_cnt++;
+		data->parsed_data->E_cnt++;
 	else if (point == 6)
-		data->parsed_data.W_cnt++;
+		data->parsed_data->W_cnt++;
 }
 
 static void set_count_bucket(t_data *data)
 {
-	data->parsed_data.space_cnt = 0;
-	data->parsed_data.N_cnt = 0;
-	data->parsed_data.S_cnt = 0;
-	data->parsed_data.E_cnt = 0;
-	data->parsed_data.W_cnt = 0;
+	data->parsed_data->space_cnt = 0;
+	data->parsed_data->N_cnt = 0;
+	data->parsed_data->S_cnt = 0;
+	data->parsed_data->E_cnt = 0;
+	data->parsed_data->W_cnt = 0;
 }
 
 int validate_mapdata_space(int **map, t_data *data)
@@ -57,18 +57,18 @@ int validate_mapdata_space(int **map, t_data *data)
 
 	ix = 1;
 	set_count_bucket(data);
-	while (ix < data->parsed_data.map_height - 1)
+	while (ix < data->parsed_data->map_height - 1)
 	{
 		jx = 1;
-		while (jx < data->parsed_data.map_width - 1)
+		while (jx < data->parsed_data->map_width - 1)
 		{
 			count_space_type(map[ix][jx], data);
 			if (map[ix][jx] != 0 && map[ix][jx] != 2) 
 				checker = check_mappoint(map, ix, jx);
 			if (map[ix][jx] == 3)
 			{
-				data->player.pos_x = (double)jx;
-				data->player.pos_y = (double)ix;
+				data->player->pos_x = (double)jx;
+				data->player->pos_y = (double)ix;
 			}
 			if (checker)
 				return (1);

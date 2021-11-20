@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:08:01 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/12 00:11:32 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/21 00:31:07 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int subcallback_exit(void *dt)
 	t_data *data;
 
 	data = (t_data *)dt;	
-	mlx_destroy_window(data->mlx_ptr, data->window.win_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->window->win_ptr);
 	exit(0);
 	return (0);
 }
@@ -68,9 +68,9 @@ int callback_hook(char *str)
 
 void set_hooks(t_data *data)
 {
-	mlx_mouse_hook(data->window.win_ptr, &callback_mouse, "mouse");
-	mlx_key_hook(data->window.win_ptr, &callback_key, (void *)data);
-	mlx_expose_hook(data->window.win_ptr, &callback_expose, "expose");
-	mlx_hook(data->window.win_ptr, 17, 0, &subcallback_exit, (void *)data);
+	mlx_mouse_hook(data->window->win_ptr, &callback_mouse, "mouse");
+	mlx_key_hook(data->window->win_ptr, &callback_key, (void *)data);
+	mlx_expose_hook(data->window->win_ptr, &callback_expose, "expose");
+	mlx_hook(data->window->win_ptr, 17, 0, &subcallback_exit, (void *)data);
 	// mlx_loop_hook(data->mlx_ptr, &callback_hook, "loop");
 }

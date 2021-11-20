@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:59:38 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/20 23:54:49 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/21 00:38:18 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **env)
 	t_data	*data;
 
 	data = NULL;
-	init_game(argc, argv, env, data);
+	init_game(argc, argv, env, &data);
 	print_mapmatrix(data->map_matrix, data);
 	render(data);
 	set_hooks(data);
