@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 01:04:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/14 01:05:21 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/11/21 00:05:42 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int get_basic_screen_size(t_data *data, int *x_ptr, int *y_ptr)
 	int max_x;
 	int max_y;
 
-	max_x = data->window.resol_max_x;
-	max_y = data->window.resol_max_y;
+	max_x = data->window->resol_max_x;
+	max_y = data->window->resol_max_y;
 	if ((max_x / 16) == (max_y / 9))
 	{
 		*x_ptr = 960;
@@ -54,11 +54,23 @@ int init_window(t_data *data)
 	return (0);
 }
 
+int init_struct(t_data *data)
+{
+	data = (t_data *)ft_calloc(sizeof(t_data), 1);
+	if (!data)
+		ft_strerr("data error\n");
+	data->parsed_data = (t_static *)ft_calloc(sizeof(t_static), 1);
+	data->player = (t_player *)ft_calloc(sizeof(t_player), 1);
+	data->parsed_data = (t_static *)ft_calloc(sizeof(t_static), 1);
+	return (0);
+}
+
 int init_game(int argc, char **argv, char **env, t_data *data)
 {
 	if (argc != 2)
 		ft_strerr("Error : no parameter\n");
-	if (parse_mapfile(argv[1], env, data)
+	if (init_struct(data)
+		|| parse_mapfile(argv[1], env, data)
 		|| init_struct_player(&(data->player))
 		|| init_window(data))
 		ft_strerr("Error : the game can't be loaded");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/17 14:27:01 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/21 00:04:29 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <math.h>
 # include "../lib/libft/libft.h"
+# include "../lib/libvec/libvec.h"
 # include "../lib/minilibx_mms_20210621/mlx.h"
 
 # define trs(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%s\n", x); }
@@ -81,9 +82,9 @@ typedef struct s_data
 	void			*main_image_ptr;
 	char			*current_path;
 	int				**map_matrix;
-	struct s_player player;
-	struct s_window	window;
-	struct s_static parsed_data;
+	struct s_player *player;
+	struct s_window	*window;
+	struct s_static *parsed_data;
 }	t_data;
 
 

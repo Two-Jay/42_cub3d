@@ -4,3 +4,9 @@
 [submodule "lib/l"]
 	path = lib/l
 	url = https://github.com/Two-Jay/42_libft.git
+[submodule "lib/libft"]
+	path = lib/libft
+	url = https://github.com/Two-Jay/42_libft.git
+[submodule "lib/libvec"]
+	path = lib/libvec
+	url = https://github.com/Two-Jay/libvec.git
