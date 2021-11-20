@@ -6,11 +6,16 @@
 /*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:38:25 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:17:59 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/21 01:49:05 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static int convet_RGBvalue_to_int(int t, int *parsed)
+{
+	return (t << 24 | parsed[0] << 16 | parsed[1] << 8 | parsed[2]);
+}
 
 static char	**get_RGBstr(int fd, char *key)
 {
@@ -69,11 +74,15 @@ int	parse_all_RGBvalue(int map_fd, t_data *data)
 	if (rgb_parsed == NULL
 		|| get_RGBvalue(rgb_parsed, data, 'F'))
 		return (1);
+	data->parsed_data->F_RGB_value
+		= convet_RGBvalue_to_int(0, data->parsed_data->F_RGB);
 	free_splited(rgb_parsed);
 	rgb_parsed = get_RGBstr(map_fd, "C");
 	if (rgb_parsed == NULL
 		|| get_RGBvalue(rgb_parsed, data, 'C'))
 		return (1);
+	data->parsed_data->C_RGB_value
+		= convet_RGBvalue_to_int(0, data->parsed_data->C_RGB);
 	free_splited(rgb_parsed);
 	return (0);
 }

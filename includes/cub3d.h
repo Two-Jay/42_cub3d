@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:38:26 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/21 01:45:50 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ typedef struct s_static
 	char					*WE_img_filepath;
 	char					*EA_img_filepath;
 	int						*F_RGB;
+	int						F_RGB_value;
 	int						*C_RGB;
+	int						C_RGB_value;
 	int						map_width;
 	int						map_height;
 	int						space_cnt;
@@ -76,15 +78,24 @@ typedef struct	s_window
 	void			*win_ptr;
 }	t_window;
 
+typedef struct s_img
+{
+	void	*main_image_ptr;
+	int		*main_image_data;
+	int		size_length;
+	int		bpp;
+	int		endian;
+}	t_img;
+
 typedef struct s_data
 {
 	void			*mlx_ptr;
-	void			*main_image_ptr;
 	char			*current_path;
 	int				**map_matrix;
 	struct s_player *player;
 	struct s_window	*window;
 	struct s_static *parsed_data;
+	struct s_img	*img;
 }	t_data;
 
 

@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 01:04:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:38:51 by jekim            ###   ########.fr       */
+/*   Updated: 2021/11/21 01:21:28 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int init_window(t_data *data)
 		&data->window->resol_basic_x, &data->window->resol_basic_y);
 	data->window->win_ptr = mlx_new_window(data->mlx_ptr,
 		data->window->resol_basic_x, data->window->resol_basic_x, "cub3.d");
-	data->main_image_ptr = mlx_new_image(data->mlx_ptr, 
+	data->img->main_image_ptr = mlx_new_image(data->mlx_ptr, 
 		data->window->resol_basic_x, data->window->resol_basic_y);
 	return (0);
 }
@@ -62,7 +62,11 @@ int init_struct(t_data **data)
 	(*data)->parsed_data = (t_static *)malloc(sizeof(t_static));
 	(*data)->player = (t_player *)malloc(sizeof(t_player));
 	(*data)->window = (t_window *)malloc(sizeof(t_window));
-	if ((*data)->parsed_data == NULL || (*data)->player == NULL || (*data)->window == NULL)
+	(*data)->img = (t_img *)malloc(sizeof(t_img));
+	if ((*data)->parsed_data == NULL
+		|| (*data)->player == NULL
+		|| (*data)->window == NULL
+		|| (*data)->img == NULL)
 		ft_strerr("data error\n");
 	return (0);
 }
