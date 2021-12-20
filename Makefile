@@ -28,7 +28,7 @@ SANIT = -fsanitize=address
 CCFLAG = -Wall -Wextra -Werror -g3
 MLXFLAG = -lmlx -lm -L$(MLXDIR) -framework OpenGL -framework Appkit -lz
 LIBFT_FLAG = -lft -L$(LIBFT_DIR)
-LIBFLAG = $(MLXFLAG) $(LIBFT_FLAG) $(LIBVEC_FLAG)
+LIBFLAG = $(MLXFLAG) $(LIBFT_FLAG)
 INCLUDES = -I$(HEAD_DIR) -I$(LIBFT_DIR) -I$(MLXDIR)
 
 LIBFT = $(LIBFT_DIR)libft.a
