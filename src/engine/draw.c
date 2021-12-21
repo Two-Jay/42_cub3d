@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 17:11:17 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 02:03:10 by jekim            ###   ########.fr       */
+/*   Updated: 2021/12/21 19:08:17 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,48 @@ void put_pixel_to_img(t_img *img, int x, int y, int color)
 {
 	char *dst;
 
-    dst = (char *)img->main_image_data + (y * img->size_length + x * (img->bpp / 8));
-    *(unsigned int *)dst = color;
+	dst = (char *)img->main_image_data + (y * img->size_length + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
-void draw_test(t_data *data)
+void put_line_orthos_x_from_top(t_data *data, int line_len, int x_position, int color)
 {
-    int ix;
-    int jx;
+	int ix;
 
-    ix = 0;
-    while (ix < 100)
-    {
-        jx = 0;
-        while (jx < 100)
-        	put_pixel_to_img(data->img, ix, jx++, data->parsed_data->C_RGB_value);
-        ix++;
-    }
+	ix = 0;
+	while (ix < line_len)
+	{
+		put_pixel_to_img(data->img, ix, x_position, color);
+		ix++;
+	}
 }
 
-int render(t_data *data)
+void put_line_orthos_x_from_middle(t_data *data, int diameter, int x_position, int color)
 {
-    data->img->main_image_data = (int *)mlx_get_data_addr(
-											data->img->main_image_ptr,
-											&data->img->bpp,
-											&data->img->size_length,
-											&data->img->endian);
-	draw_test(data);
-    mlx_put_image_to_window(data->mlx_ptr,
-                                data->window->win_ptr,
-                                data->img->main_image_ptr, 0, 0);
-    return (0);
+	int ix;
+	int jx;
+	int limit;
+
+	ix = data->window->resol_basic_y / 2;
+	jx = data->window->resol_basic_y / 2 - 1;
+	limit = diameter / 2;
+	while (ix < limit)
+	{
+		put_pixel_to_img(data->img, ix, x_position, color);
+		put_pixel_to_img(data->img, jx, x_position, color);
+		ix++;
+		jx--;
+	}
+}
+
+void put_line_orthos_x_from_bottom(t_data *data, int line_len, int x_position, int color)
+{
+	int ix;
+
+	ix = data->window->resol_basic_y;
+	while (ix < line_len)
+	{
+		put_pixel_to_img(data->img, ix, x_position, color);
+		ix--;
+	}
 }
