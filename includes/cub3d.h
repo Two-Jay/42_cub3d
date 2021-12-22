@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/12/20 17:24:52 by jekim            ###   ########.fr       */
+/*   Updated: 2021/12/22 12:30:28 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@
 # include "../lib/libft/libft.h"
 # include "../lib/minilibx_mms_20210621/mlx.h"
 # include "./structure.h"
-
-# define trs(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%s\n", x); }
-# define trc(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%c\n", x); }
-# define tri(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%d\n", x); }
-# define trp(x...) { printf("[%s:%d] %s = ", __func__, __LINE__, #x); printf("%p\n", x); }
+# include "./debug.h"
 
 /*
 ** key binding
@@ -67,12 +63,10 @@ void set_hooks(t_data *data);
 /*
 **	engine_part
 */
-int	render(t_data *data);
-
-/*
-**	test_function
-*/
-int check_struct_p(t_data *data);
-int print_mapmatrix(int **map, t_data *data);
+int		render(t_data *data);
+void	put_pixel_to_img(t_img *img, int x, int y, int color);
+void	put_line_orthos_x_from_top(t_data *data, int line_len, int x_position, int color);
+void	put_line_orthos_x_from_middle(t_data *data, int diameter, int x_position, int color);
+void	put_line_orthos_x_from_bottom(t_data *data, int line_len, int x_position, int color);
 
 #endif
