@@ -1,0 +1,43 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makafile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jekim <arabi1549@naver.com>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/01/11 02:25:46 by jseo              #+#    #+#              #
+#    Updated: 2021/12/20 18:27:41 by jekim            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
+SRCS			= 
+
+OBJS			= $(SRCS:.c=.o)
+
+CC				= gcc
+RM				= rm -rf
+CFLAGS			= -Wall -Wextra -Werror -I. -g3
+
+NAME			= libcub.a
+
+all:			$(NAME)
+
+$(NAME):		$(OBJS)
+				@ar rc $(NAME) $(OBJS)
+				@echo "\033[0;92m* $(NAME) was created *\033[0m"
+
+%.o : %.c
+	@$(CC) $(CFLAGS) $(INCLUDE) $< -c -o $@
+
+clean:
+				@$(RM) $(OBJS)
+
+fclean:			clean
+				@$(RM) $(NAME)
+				@echo "\033[0;91m* $(NAME) was removed *\033[0m"
+
+re:				fclean $(NAME)
+
+.PHONY:			all clean fclean re bonus
+
