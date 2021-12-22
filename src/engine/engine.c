@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 19:08:04 by jekim             #+#    #+#             */
-/*   Updated: 2021/12/21 19:08:12 by jekim            ###   ########.fr       */
+/*   Updated: 2021/12/22 12:58:08 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void draw_test(t_data *data)
 	ix = 0;
 	while (ix < 100)
 	{
-		put_pixel_to_img(data->img, ix, 10, data->parsed_data->C_RGB_value);
+		put_pixel_img(data->img, ix, 10, data->parsed_data->C_RGB_value);
 		ix++;
 	}
 }
