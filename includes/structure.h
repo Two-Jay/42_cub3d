@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2021/12/20 17:23:52 by jekim            ###   ########.fr       */
+/*   Updated: 2021/12/26 16:20:06 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,11 @@ typedef struct s_data
 	struct s_static *parsed_data;
 	struct s_img	*img;
 }	t_data;
+
+typedef struct s_vec
+{
+	double x;
+	double y;
+}	t_vec;
 
 #endif
