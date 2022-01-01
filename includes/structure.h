@@ -6,12 +6,30 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2021/12/26 16:20:06 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/01 21:58:42 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
+
+typedef struct s_vec
+{
+	double	x;
+	double	y;
+}	t_vec;
+
+typedef struct s_pixel
+{
+	double			distance;
+	unsigned int	*color;
+}	t_pixel;
+
+typedef struct s_ray
+{
+	t_vec	dir;
+	double	distance;
+}	t_ray;
 
 typedef struct s_mapdata_lst
 {
@@ -48,15 +66,6 @@ typedef struct s_static
 	struct s_mapdata_lst	*rawdata;
 }	t_static;
 
-typedef struct	s_window
-{
-	int 			resol_max_x;
-	int 			resol_max_y;
-	int				resol_basic_x;
-	int				resol_basic_y;
-	void			*win_ptr;
-}	t_window;
-
 typedef struct s_img
 {
 	void	*main_image_ptr;
@@ -66,21 +75,32 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct	s_window
+{
+	int 			resol_max_x;
+	int 			resol_max_y;
+	int				resol_basic_x;
+	int				resol_basic_y;
+	void			*win_ptr;
+	void			*mlx_ptr;
+	t_vec			origin;
+	t_vec			dir;
+	t_vec			plane;
+	t_pixel			**pixel;
+	t_ray			*ray;
+	double			sin_unit;
+	double			cos_unit;
+	double			distance;
+	struct s_img	*img;
+}	t_window;
+
 typedef struct s_data
 {
-	void			*mlx_ptr;
 	char			*current_path;
 	int				**map_matrix;
 	struct s_player *player;
 	struct s_window	*window;
 	struct s_static *parsed_data;
-	struct s_img	*img;
 }	t_data;
-
-typedef struct s_vec
-{
-	double x;
-	double y;
-}	t_vec;
 
 #endif

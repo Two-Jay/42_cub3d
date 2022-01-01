@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:59:38 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 01:04:47 by jekim            ###   ########.fr       */
+/*   Updated: 2021/12/28 18:33:33 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	main(int argc, char **argv, char **env)
 	trp(data);
 	render(data);
 	set_hooks(data);
-	mlx_loop(data->mlx_ptr);
+	mlx_loop(data->window->mlx_ptr);
 	return (EXIT_SUCCESS);
 }

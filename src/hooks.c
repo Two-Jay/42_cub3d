@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:08:01 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:31:07 by jekim            ###   ########.fr       */
+/*   Updated: 2021/12/28 18:34:10 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int subcallback_exit(void *dt)
 	t_data *data;
 
 	data = (t_data *)dt;	
-	mlx_destroy_window(data->mlx_ptr, data->window->win_ptr);
+	mlx_destroy_window(data->window->mlx_ptr, data->window->win_ptr);
 	exit(0);
 	return (0);
 }

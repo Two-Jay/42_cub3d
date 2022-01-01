@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/12/22 13:15:38 by jekim            ###   ########.fr       */
+/*   Updated: 2021/12/28 18:24:55 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "./debug.h"
 
 /*
-** key binding
+**  key binding
 */
 # define BUTTON_REDCROSS 0x6d357408
 # define KEY_ESC 0x35
@@ -32,6 +32,11 @@
 # define KEY_S 0x1
 # define KEY_A 0x0
 # define KEY_D 0x2
+
+/*
+**  anlge_value
+*/
+# define ANGLE_MIN 5
 
 /*
 **	initiation_part
@@ -64,9 +69,18 @@ void set_hooks(t_data *data);
 **	engine_part
 */
 int		render(t_data *data);
-void	put_pixel_to_img(t_img *img, int x, int y, int color);
-void	put_line_orthos_x_from_top(t_data *data, int line_len, int x_position, int color);
-void	put_line_orthos_x_from_middle(t_data *data, int diameter, int x_position, int color);
-void	put_line_orthos_x_from_bottom(t_data *data, int line_len, int x_position, int color);
+void	put_pixel_img(t_img *img, int x, int y, int color);
+void    put_yline_img(t_window *win, int line_l, int x_pos, int color);
+
+/*
+**	engine - functions for vector calculation 
+*/
+t_vec	vec_create(double x, double y);
+t_vec	vec_add(t_vec vec1, t_vec vec2);
+t_vec	vec_minus(t_vec vec1, t_vec vec2);
+t_vec	vec_scala_mul(t_vec vec, double n);
+t_vec	vec_equation(t_vec *coeff0, t_vec *coeff1, t_vec *constant);
+t_vec	vec_rot_ccw(t_vec a, double angle);
+t_vec	vec_rot_min_ccw(t_vec a);
 
 #endif

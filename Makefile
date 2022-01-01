@@ -48,7 +48,9 @@ PARSER_FILE		=	mapparser.c \
 					mapparser_validator.c \
 					mapparser_validator_space.c 
 
-ENGINE_FILE		=	draw.c 
+ENGINE_FILE		=	engine.c \
+					draw.c \
+					vector.c \
 
 
 SRC_OBJ_FILE	=	$(SRCFILE:.c=.o)
