@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 01:04:55 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/06 17:17:21 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/06 18:07:29 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,28 @@ t_pixel **init_pixel(int w, int h, t_img *img)
 	int		y;
 
 	ret = (t_pixel **)malloc(sizeof(t_pixel *) * w);
-	y = -1;
-	while (++y < w)
+	x = -1;
+	while (++x < w)
 	{
-		ret[y] = (t_pixel *)malloc(sizeof(t_pixel) * h);
-		x = -1;
-		while (++x < h)
+		y = -1;
+		ret[x] = (t_pixel *)malloc(sizeof(t_pixel) * h);
+		while (++y < h)
 		{
-			ret[y][x].distance = INFINITY;
-			ret[y][x].color = (unsigned int *)(char *)img->data_addr
-				+ (img->size_length * y) + (img->bpp / 8 * x);
+			ret[x][y].distance = INFINITY;
+			ret[x][y].color = (unsigned int *)((char *)img->data_addr
+				+ img->size_length * y + img->bpp / 8 * x);
 		}
 	}
+	printf("set pixel matrix = with (h : %d w : %d)\n", x, y);
 	return (ret);
 }
 
 int init_window(t_window *win)
 {
 	win->mlx_ptr = mlx_init();
-	mlx_get_screen_size(win->mlx_ptr,
-		&win->max_w, &win->max_h);
+	mlx_get_screen_size(win->mlx_ptr, &win->max_w, &win->max_h);
 	get_basic_screen_size(&win->w, &win->h);
-	win->win_ptr = mlx_new_window(win->mlx_ptr, win->w, win->w, "cub3.d");
+	win->win_ptr = mlx_new_window(win->mlx_ptr, win->w, win->h, "cub3.d");
 	win->img->img_ptr = mlx_new_image(win->mlx_ptr, win->w, win->h);
 	win->distance = 1 / tan(FOV / 2) * win->w / 2;
 	win->img->data_addr = (unsigned int *)mlx_get_data_addr(win->img->img_ptr,

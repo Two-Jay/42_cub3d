@@ -14,6 +14,8 @@
 NAME = cub3d
 CC = gcc
 
+DF = -g3
+
 INCDIR = ./includes/
 OBJDIR = ./obj/
 SRCDIR = ./src/
@@ -66,18 +68,18 @@ all: $(NAME)
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	@mkdir -p obj
-	@$(CC) $(CCFLAG) $(INCLUDES) $< -c -o $@
+	@$(CC) $(DF) $(CCFLAG) $(INCLUDES) $< -c -o $@
 
 $(OBJDIR)%.o : $(PARSER_DIR)%.c
-	@$(CC) $(CCFLAG) $(INCLUDES) $< -c -o $@
+	@$(CC) $(DF) $(CCFLAG) $(INCLUDES) $< -c -o $@
 
 $(OBJDIR)%.o : $(ENGINE_DIR)%.c
-	@$(CC) $(CCFLAG) $(INCLUDES) $< -c -o $@
+	@$(CC) $(DF) $(CCFLAG) $(INCLUDES) $< -c -o $@
 
 $(NAME)		:	$(SRC_OBJ) $(PARSER_OBJ) $(ENGINE_OBJ)
 	@$(MAKE) -C $(LIBFT_DIR)
 	@$(MAKE) -C $(MLXDIR)
-	@$(CC) $(CCFLAG) $(SRC_OBJ) $(PARSER_OBJ) $(ENGINE_OBJ) $(LIBFLAG) $(SANIT) $(INCLUDES) -o $@
+	@$(CC) $(DF) $(CCFLAG) $(SRC_OBJ) $(PARSER_OBJ) $(ENGINE_OBJ) $(LIBFLAG) $(SANIT) $(INCLUDES) -o $@
 	@ln -s ./lib/minilibx_mms_20210621/libmlx.dylib ./libmlx.dylib
 	@echo "\033[0;92m* $(NAME) program file was created *\033[0m"
 

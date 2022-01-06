@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser_RGB.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:38:25 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 01:49:05 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/06 17:51:51 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	get_RGBvalue(char **parsed, t_data *data, char key)
 {
 	int	ix;
 	int	ovf_flag;
-	int	value;
+	unsigned int	value;
 
 	ix = 0;
 	ovf_flag = 0;
@@ -48,7 +48,7 @@ static int	get_RGBvalue(char **parsed, t_data *data, char key)
 	{
 		if (ft_isable_strtonbr(parsed[ix]))
 			return (1);
-		value = ft_atoi_covf(parsed[ix], &ovf_flag);
+		value = (unsigned int)ft_atoi_covf(parsed[ix], &ovf_flag);
 		if (ovf_flag == 1 || value < 0 || value > 255)
 			return (1);
 		if (key == 'F')

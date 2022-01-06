@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/02 17:30:22 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/06 17:50:25 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ typedef struct s_static
 	char					*WE_img_filepath;
 	char					*EA_img_filepath;
 	int						*F_RGB;
-	int						F_RGB_value;
+	unsigned int			F_RGB_value;
 	int						*C_RGB;
-	int						C_RGB_value;
+	unsigned int			C_RGB_value;
 	int						map_width;
 	int						map_height;
 	int						space_cnt;

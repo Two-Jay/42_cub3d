@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 19:08:04 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/05 21:59:50 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/06 18:05:54 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void draw_test(t_data *data)
 	}
 }
 
-void draw_background(t_window *win, int f_color, int c_color)
+void draw_background(t_window *win, unsigned int f_color, unsigned int c_color)
 {
 	int x;
 	int y;
@@ -44,6 +44,7 @@ void draw_background(t_window *win, int f_color, int c_color)
 		while (++x < win->w)
 			*(pxlptr[x][y].color) = c_color;
 	}
+	printf("set background = (%d %d)\n", x, y);
 }
 
 int put_image(t_data *data)
@@ -57,5 +58,6 @@ int put_image(t_data *data)
 int render(t_data *data)
 {
 	draw_background(data->window, data->parsed_data->F_RGB_value, data->parsed_data->C_RGB_value);
+	put_image(data);
 	return (0);
 }
