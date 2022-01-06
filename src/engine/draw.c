@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 17:11:17 by jekim             #+#    #+#             */
-/*   Updated: 2021/12/28 18:24:38 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/02 17:25:39 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void put_pixel_img(t_img *img, int x, int y, int color)
 {
 	char *dst;
 
-	dst = (char *)img->main_image_data + (y * img->size_length + x * (img->bpp / 8));
+	dst = (char *)img->data_addr + (y * img->size_length + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 

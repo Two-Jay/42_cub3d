@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/12/28 18:24:55 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/04 17:10:04 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include "./structure.h"
 # include "./debug.h"
 
+# define ERROR_OCCURED 1;
+# define TRUE 1;
+# define FALSE 0;
+
 /*
 **  key binding
 */
@@ -37,6 +41,7 @@
 **  anlge_value
 */
 # define ANGLE_MIN 5
+# define FOV 66
 
 /*
 **	initiation_part

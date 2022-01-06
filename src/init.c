@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 01:04:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/12/28 18:32:59 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/06 17:17:21 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,37 +20,49 @@ int init_struct_player(t_player *player)
 	return (0);
 }
 
-int get_basic_screen_size(t_window *win, int *x_ptr, int *y_ptr)
+int get_basic_screen_size(int *x_ptr, int *y_ptr)
 {
-	int max_x;
-	int max_y;
-
-	max_x = win->resol_max_x;
-	max_y = win->resol_max_y;
-	if ((max_x / 16) == (max_y / 9))
-	{
-		*x_ptr = 960;
-		*y_ptr = 540;
-	}
-	else
-	{
-		*x_ptr = 800;
-		*y_ptr = 600;
-	}
+	*x_ptr = 800;
+	*y_ptr = 640;
 	return (0);
+}
+
+t_pixel **init_pixel(int w, int h, t_img *img)
+{
+	t_pixel **ret;
+	int		x;
+	int		y;
+
+	ret = (t_pixel **)malloc(sizeof(t_pixel *) * w);
+	y = -1;
+	while (++y < w)
+	{
+		ret[y] = (t_pixel *)malloc(sizeof(t_pixel) * h);
+		x = -1;
+		while (++x < h)
+		{
+			ret[y][x].distance = INFINITY;
+			ret[y][x].color = (unsigned int *)(char *)img->data_addr
+				+ (img->size_length * y) + (img->bpp / 8 * x);
+		}
+	}
+	return (ret);
 }
 
 int init_window(t_window *win)
 {
 	win->mlx_ptr = mlx_init();
 	mlx_get_screen_size(win->mlx_ptr,
-		&win->resol_max_x, &win->resol_max_y);
-	get_basic_screen_size(win,
-		&win->resol_basic_x, &win->resol_basic_y);
-	win->win_ptr = mlx_new_window(win->mlx_ptr,
-		win->resol_basic_x, win->resol_basic_x, "cub3.d");
-	win->img->main_image_ptr = mlx_new_image(win->mlx_ptr, 
-		win->resol_basic_x, win->resol_basic_y);
+		&win->max_w, &win->max_h);
+	get_basic_screen_size(&win->w, &win->h);
+	win->win_ptr = mlx_new_window(win->mlx_ptr, win->w, win->w, "cub3.d");
+	win->img->img_ptr = mlx_new_image(win->mlx_ptr, win->w, win->h);
+	win->distance = 1 / tan(FOV / 2) * win->w / 2;
+	win->img->data_addr = (unsigned int *)mlx_get_data_addr(win->img->img_ptr,
+			&win->img->bpp, &win->img->size_length, &win->img->endian);
+	win->pixel = init_pixel(win->w, win->h, win->img);
+	tri(win->w);
+	tri(win->h);
 	return (0);
 }
 

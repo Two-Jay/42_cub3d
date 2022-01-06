@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/01 21:58:42 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/02 17:30:22 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,19 @@ typedef struct s_static
 
 typedef struct s_img
 {
-	void	*main_image_ptr;
-	int		*main_image_data;
-	int		size_length;
-	int		bpp;
-	int		endian;
+	void			*img_ptr;
+	unsigned int	*data_addr;
+	int				size_length;
+	int				bpp;
+	int				endian;
 }	t_img;
 
 typedef struct	s_window
 {
-	int 			resol_max_x;
-	int 			resol_max_y;
-	int				resol_basic_x;
-	int				resol_basic_y;
+	int 			max_w;
+	int 			max_h;
+	int				w;
+	int				h;
 	void			*win_ptr;
 	void			*mlx_ptr;
 	t_vec			origin;
