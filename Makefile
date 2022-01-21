@@ -51,6 +51,7 @@ PARSER_FILE		=	mapparser.c \
 					mapparser_validator_space.c 
 
 ENGINE_FILE		=	engine.c \
+					cast_ray.c \
 					draw.c \
 					vector.c \
 

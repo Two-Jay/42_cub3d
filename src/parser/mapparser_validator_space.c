@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser_validator_space.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 00:57:04 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:18:52 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/14 13:48:57 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int validate_mapdata_space(int **map, t_data *data)
 				checker = check_mappoint(map, ix, jx);
 			if (map[ix][jx] == 3)
 			{
-				data->player->pos_x = (double)jx;
-				data->player->pos_y = (double)ix;
+				data->player->pos.x = (double)jx;
+				data->player->pos.y = (double)ix;
 			}
 			if (checker)
 				return (1);

@@ -6,23 +6,11 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 19:08:04 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/06 18:05:54 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/17 18:06:58 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void draw_test(t_data *data)
-{
-	int ix;
-
-	ix = 0;
-	while (ix < 100)
-	{
-		put_yline_img(data->window, 100 + (ix * 2), ix, data->parsed_data->C_RGB_value);
-		ix++;
-	}
-}
 
 void draw_background(t_window *win, unsigned int f_color, unsigned int c_color)
 {
@@ -44,7 +32,6 @@ void draw_background(t_window *win, unsigned int f_color, unsigned int c_color)
 		while (++x < win->w)
 			*(pxlptr[x][y].color) = c_color;
 	}
-	printf("set background = (%d %d)\n", x, y);
 }
 
 int put_image(t_data *data)
@@ -55,9 +42,11 @@ int put_image(t_data *data)
 	return (0);
 }
 
-int render(t_data *data)
+int render(t_data *data, int **map)
 {
 	draw_background(data->window, data->parsed_data->F_RGB_value, data->parsed_data->C_RGB_value);
-	put_image(data);
+	if (put_image(data)
+		|| cast_ray(data->window, data->player, map))
+		return (ERROR_OCCURED);
 	return (0);
 }

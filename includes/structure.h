@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/06 17:50:25 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/17 15:37:34 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ typedef struct s_vec
 	double	y;
 }	t_vec;
 
+typedef struct s_intvec
+{
+	int		x;
+	int		y;
+}	t_intvec;
+
 typedef struct s_pixel
 {
 	double			distance;
@@ -28,6 +34,8 @@ typedef struct s_pixel
 typedef struct s_ray
 {
 	t_vec	dir;
+	t_vec	deltaDist;
+	t_vec	sideDist;
 	double	distance;
 }	t_ray;
 
@@ -39,11 +47,12 @@ typedef struct s_mapdata_lst
 
 typedef struct s_player
 {
-	double pos_x;
-	double pos_y;
-	int	health;
-	int	speed;
-	int armo;
+	t_vec pos;
+	t_vec dir;
+	t_vec plain;
+	double camera_x;
+	double time;
+	double old_time;
 }	t_player;
 
 typedef struct s_static
@@ -83,9 +92,6 @@ typedef struct	s_window
 	int				h;
 	void			*win_ptr;
 	void			*mlx_ptr;
-	t_vec			origin;
-	t_vec			dir;
-	t_vec			plane;
 	t_pixel			**pixel;
 	t_ray			*ray;
 	double			sin_unit;
@@ -102,5 +108,7 @@ typedef struct s_data
 	struct s_window	*window;
 	struct s_static *parsed_data;
 }	t_data;
+
+
 
 #endif

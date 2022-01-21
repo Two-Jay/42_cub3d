@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/04 17:10:04 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/17 18:05:54 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # include "./structure.h"
 # include "./debug.h"
 
-# define ERROR_OCCURED 1;
-# define TRUE 1;
-# define FALSE 0;
+# define ERROR_OCCURED 1
+# define TRUE 1
+# define FALSE 0
 
 /*
 **  key binding
@@ -73,9 +73,10 @@ void set_hooks(t_data *data);
 /*
 **	engine_part
 */
-int		render(t_data *data);
+int		render(t_data *data, int **map);
 void	put_pixel_img(t_img *img, int x, int y, int color);
 void    put_yline_img(t_window *win, int line_l, int x_pos, int color);
+int     cast_ray(t_window *win, t_player *plyr, int **map);
 
 /*
 **	engine - functions for vector calculation 

@@ -6,19 +6,11 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 01:04:55 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/06 18:07:29 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/14 15:58:33 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int init_struct_player(t_player *player)
-{
-	player->health = 100;
-	player->armo = 15;
-	player->speed = 10;
-	return (0);
-}
 
 int get_basic_screen_size(int *x_ptr, int *y_ptr)
 {
@@ -46,7 +38,6 @@ t_pixel **init_pixel(int w, int h, t_img *img)
 				+ img->size_length * y + img->bpp / 8 * x);
 		}
 	}
-	printf("set pixel matrix = with (h : %d w : %d)\n", x, y);
 	return (ret);
 }
 
@@ -57,24 +48,29 @@ int init_window(t_window *win)
 	get_basic_screen_size(&win->w, &win->h);
 	win->win_ptr = mlx_new_window(win->mlx_ptr, win->w, win->h, "cub3.d");
 	win->img->img_ptr = mlx_new_image(win->mlx_ptr, win->w, win->h);
-	win->distance = 1 / tan(FOV / 2) * win->w / 2;
 	win->img->data_addr = (unsigned int *)mlx_get_data_addr(win->img->img_ptr,
 			&win->img->bpp, &win->img->size_length, &win->img->endian);
 	win->pixel = init_pixel(win->w, win->h, win->img);
-	tri(win->w);
-	tri(win->h);
+	win->distance = 1 / tan(FOV / 2) * win->w / 2;
+	win->ray = (t_ray *)ft_calloc(sizeof(t_ray), win->w);
+	return (0);
+}
+
+int init_player(t_player *plyr)
+{
+	(void)plyr;	
 	return (0);
 }
 
 int init_struct(t_data **data)
 {
-	(*data) = (t_data *)malloc(sizeof(t_data));
+	(*data) = (t_data *)ft_calloc(sizeof(t_data), 1);
 	if (data == NULL)
 		ft_strerr("data error\n");
-	(*data)->parsed_data = (t_static *)malloc(sizeof(t_static));
-	(*data)->player = (t_player *)malloc(sizeof(t_player));
-	(*data)->window = (t_window *)malloc(sizeof(t_window));
-	(*data)->window->img = (t_img *)malloc(sizeof(t_img));
+	(*data)->parsed_data = (t_static *)ft_calloc(sizeof(t_static), 1);
+	(*data)->player = (t_player *)ft_calloc(sizeof(t_player), 1);
+	(*data)->window = (t_window *)ft_calloc(sizeof(t_window), 1);
+	(*data)->window->img = (t_img *)ft_calloc(sizeof(t_img), 1);
 	if ((*data)->parsed_data == NULL
 		|| (*data)->player == NULL
 		|| (*data)->window == NULL
@@ -88,8 +84,8 @@ int init_game(int argc, char **argv, char **env, t_data **data)
 	if (argc != 2)
 		ft_strerr("Error : no parameter\n");
 	if (init_struct(data)
-		|| init_struct_player((*data)->player)
 		|| init_window((*data)->window)
+		|| init_player((*data)->player)
 		|| parse_mapfile(argv[1], env, *data))
 		ft_strerr("Error : the game can't be loaded");
 	return (0);
