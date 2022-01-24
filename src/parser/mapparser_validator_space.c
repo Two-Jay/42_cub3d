@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 00:57:04 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/14 13:48:57 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/23 16:40:54 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int validate_mapdata_space(int **map, t_data *data)
 
 	ix = 1;
 	set_count_bucket(data);
-	while (ix < data->parsed_data->map_height - 1)
+	while (ix < data->map->h - 1)
 	{
 		jx = 1;
-		while (jx < data->parsed_data->map_width - 1)
+		while (jx < data->map->w - 1)
 		{
 			count_space_type(map[ix][jx], data);
 			if (map[ix][jx] != 0 && map[ix][jx] != 2) 

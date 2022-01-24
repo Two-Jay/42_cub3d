@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:34:55 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/23 16:41:05 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int clear_mapdata_lst(t_mapdata_lst *lst, t_data *data)
 	int				ix;
 
 	ix = 0;
-	while (ix < data->parsed_data->map_height)
+	while (ix < data->map->h)
 	{
 		ix++;
 		tmp = lst->next;
@@ -95,8 +95,8 @@ int	parse_mapfile(char *filepath, char **env, t_data *data)
 		|| parse_all_RGBvalue(map_fd, data)
 		|| parse_mapfile_rawdata(map_fd, data)
 		|| convert_mapdata_matrix(data)
-		|| validate_mapdata_border(data->map_matrix, data)
-		|| validate_mapdata_space(data->map_matrix, data)
+		|| validate_mapdata_border(data->map->mtrx, data)
+		|| validate_mapdata_space(data->map->mtrx, data)
 		|| validate_mapdata_object(data)
 		|| clear_mapdata_lst(data->parsed_data->rawdata, data))
 		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));

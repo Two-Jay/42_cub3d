@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   test_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:47:50 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:34:23 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/23 16:43:08 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int print_mapmatrix(int **map, t_data *data)
+int print_mapmatrix(t_map *map)
 {
 	int ix;
 	int jx;
 	
 	ix = 0;
-	while (ix < data->parsed_data->map_height)
+	while (ix < map->h)
 	{
 		jx = 0;
-		while (jx < data->parsed_data->map_width)
+		while (jx < map->w)
 		{
-			printf("%d", map[ix][jx]);
+			printf("%d", map->mtrx[ix][jx]);
 			jx++;
 		}
 		printf("\n");

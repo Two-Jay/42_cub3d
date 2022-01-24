@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser_mapdata.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:52:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:44:08 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/23 16:41:05 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,17 @@ int convert_mapdata_matrix(t_data *data)
 
 	ix = -1;
 	lst = data->parsed_data->rawdata->next;
-	ret = (int **)malloc(sizeof(int *) * (data->parsed_data->map_height + 1));
+	ret = (int **)malloc(sizeof(int *) * (data->map->h + 1));
 	if (!ret)
 		return (1);
-	ret[data->parsed_data->map_height] = NULL;
-	while (++ix < data->parsed_data->map_height)
+	ret[data->map->h] = NULL;
+	while (++ix < data->map->h)
 	{
-		ret[ix] = malloc_mapdata_row(lst->row, data->parsed_data->map_width);
+		ret[ix] = malloc_mapdata_row(lst->row, data->map->w);
 		if (!ret[ix])
 			return (1);
 		lst = lst->next;
 	}
-	data->map_matrix = ret;
+	data->map->mtrx = ret;
 	return (0);
 }

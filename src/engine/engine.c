@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 19:08:04 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/17 18:06:58 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/23 16:45:24 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int put_image(t_data *data)
 	return (0);
 }
 
-int render(t_data *data, int **map)
+int render(t_data *data)
 {
 	draw_background(data->window, data->parsed_data->F_RGB_value, data->parsed_data->C_RGB_value);
 	if (put_image(data)
-		|| cast_ray(data->window, data->player, map))
+		|| cast_ray(data->window, data->player, data->map))
 		return (ERROR_OCCURED);
 	return (0);
 }

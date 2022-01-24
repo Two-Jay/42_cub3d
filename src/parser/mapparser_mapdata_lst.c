@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser_mapdata_lst.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 00:54:43 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:17:23 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/23 16:40:54 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	get_max_width_mapdata(t_data *data)
 	current_width = 0;
 	max_width = 0;
 	lst = data->parsed_data->rawdata->next;
-	while (ix < data->parsed_data->map_height)
+	while (ix < data->map->h)
 	{
 		current_width = ft_strlen(lst->row);
 		if (max_width < current_width)
@@ -54,7 +54,7 @@ int	parse_mapfile_rawdata(int map_fd, t_data *data)
 	int				line_check;
 	char			*map_line;
 
-	data->parsed_data->map_height = 0;
+	data->map->h = 0;
 	lst = (t_mapdata_lst *)malloc(sizeof(t_mapdata_lst));
 	head = lst;
 	if (skip_line(map_fd, &map_line, &line_check))
@@ -64,14 +64,14 @@ int	parse_mapfile_rawdata(int map_fd, t_data *data)
 		lst = append_mapdata_lst(map_line, lst);
 		if (!lst)
 			return (1);
-		data->parsed_data->map_height++;
+		data->map->h++;
 		line_check = ft_strgnl(map_fd, &map_line);
 	}
 	lst = append_mapdata_lst(map_line, lst);
 	if (!lst)
 		return (1);
-	data->parsed_data->map_height++;
+	data->map->h++;
 	data->parsed_data->rawdata = head;
-	data->parsed_data->map_width = get_max_width_mapdata(data);
+	data->map->w = get_max_width_mapdata(data);
 	return (0);
 }

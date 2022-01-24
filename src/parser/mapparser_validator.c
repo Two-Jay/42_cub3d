@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser_validator.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@42seoul.student.com>          +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:56:03 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/21 00:18:11 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/23 16:40:54 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int validate_mapdata_border(int **map, t_data *data)
 	int width;
 
 	ix = 0;
-	height = data->parsed_data->map_height;
-	width = data->parsed_data->map_width;
+	height = data->map->h;
+	width = data->map->w;
 	while (ix < width)
 	{
 		if (map[0][ix] == 1 || map[height - 1][ix] == 1)

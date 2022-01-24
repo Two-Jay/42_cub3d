@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/17 15:37:34 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/23 16:39:10 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ typedef struct s_static
 	unsigned int			F_RGB_value;
 	int						*C_RGB;
 	unsigned int			C_RGB_value;
-	int						map_width;
-	int						map_height;
+
 	int						space_cnt;
 	int						N_cnt;
 	int						S_cnt;
@@ -100,10 +99,17 @@ typedef struct	s_window
 	struct s_img	*img;
 }	t_window;
 
+typedef struct s_map
+{
+	int				w;
+	int				h;
+	int				**mtrx;
+}	t_map;
+
 typedef struct s_data
 {
 	char			*current_path;
-	int				**map_matrix;
+	struct s_map	*map;
 	struct s_player *player;
 	struct s_window	*window;
 	struct s_static *parsed_data;
