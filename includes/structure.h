@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/28 00:27:44 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/28 20:04:41 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,18 @@ typedef struct s_mapdata_lst
 	struct s_mapdata_lst	*next;
 }	t_mapdata_lst;
 
-typedef struct s_dstv
+typedef struct s_camera
 {
+	t_vec 		pos;
+	t_vec 		dir;
+	t_vec 		plain;
 	t_intvec	step;
 	t_intvec	index;
 	t_vec		sideDist;
 	t_vec		deltaDist;
-}	t_dstv;
-
-typedef struct s_camera
-{
-	t_vec pos;
-	t_vec dir;
-	t_vec plain;
-	double camera_x;
-	double time;
-	double old_time;
+	double 		camera_x;
+	double 		time;
+	double 		old_time;
 }	t_camera;
 
 typedef struct s_static
