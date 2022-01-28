@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/23 16:45:12 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/28 00:26:29 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void set_hooks(t_data *data);
 int		render(t_data *data);
 void	put_pixel_img(t_img *img, int x, int y, int color);
 void    put_yline_img(t_window *win, int line_l, int x_pos, int color);
-int     cast_ray(t_window *win, t_player *plyr, t_map *map);
+int     cast_ray(t_window *win, t_camera *plyr, t_map *map);
 
 /*
 **	engine - functions for vector calculation 

@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/23 16:39:10 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/28 00:27:44 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ typedef struct s_pixel
 typedef struct s_ray
 {
 	t_vec	dir;
-	t_vec	deltaDist;
-	t_vec	sideDist;
 	double	distance;
 }	t_ray;
 
@@ -45,7 +43,15 @@ typedef struct s_mapdata_lst
 	struct s_mapdata_lst	*next;
 }	t_mapdata_lst;
 
-typedef struct s_player
+typedef struct s_dstv
+{
+	t_intvec	step;
+	t_intvec	index;
+	t_vec		sideDist;
+	t_vec		deltaDist;
+}	t_dstv;
+
+typedef struct s_camera
 {
 	t_vec pos;
 	t_vec dir;
@@ -53,7 +59,7 @@ typedef struct s_player
 	double camera_x;
 	double time;
 	double old_time;
-}	t_player;
+}	t_camera;
 
 typedef struct s_static
 {
@@ -65,7 +71,6 @@ typedef struct s_static
 	unsigned int			F_RGB_value;
 	int						*C_RGB;
 	unsigned int			C_RGB_value;
-
 	int						space_cnt;
 	int						N_cnt;
 	int						S_cnt;
@@ -110,7 +115,7 @@ typedef struct s_data
 {
 	char			*current_path;
 	struct s_map	*map;
-	struct s_player *player;
+	struct s_camera *camera;
 	struct s_window	*window;
 	struct s_static *parsed_data;
 }	t_data;

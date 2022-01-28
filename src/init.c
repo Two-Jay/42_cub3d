@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 01:04:55 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/23 16:41:15 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/28 00:26:41 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ int init_struct(t_data **data)
 	if (data == NULL)
 		ft_strerr("data error\n");
 	(*data)->parsed_data = (t_static *)ft_calloc(sizeof(t_static), 1);
-	(*data)->player = (t_player *)ft_calloc(sizeof(t_player), 1);
+	(*data)->camera = (t_camera *)ft_calloc(sizeof(t_camera), 1);
 	(*data)->window = (t_window *)ft_calloc(sizeof(t_window), 1);
 	(*data)->window->img = (t_img *)ft_calloc(sizeof(t_img), 1);
 	(*data)->map = (t_map *)ft_calloc(sizeof(t_map), 1);
 	if ((*data)->parsed_data == NULL
-		|| (*data)->player == NULL
+		|| (*data)->camera == NULL
 		|| (*data)->window == NULL
 		|| (*data)->window->img == NULL
 		|| (*data)->map == NULL)

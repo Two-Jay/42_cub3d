@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:47:50 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/23 16:43:08 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/28 00:26:41 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int check_struct_p(t_data *data)
 	trp(data);
 	trp(data->parsed_data);
 	trp(data->window);
-	trp(data->player);
+	trp(data->camera);
 	return (0);
 }

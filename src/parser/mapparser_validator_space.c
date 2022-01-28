@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 00:57:04 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/23 16:40:54 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/28 00:26:41 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int validate_mapdata_space(int **map, t_data *data)
 				checker = check_mappoint(map, ix, jx);
 			if (map[ix][jx] == 3)
 			{
-				data->player->pos.x = (double)jx;
-				data->player->pos.y = (double)ix;
+				data->camera->pos.x = (double)jx;
+				data->camera->pos.y = (double)ix;
 			}
 			if (checker)
 				return (1);
