@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/28 00:26:29 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/29 16:54:57 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ERROR_OCCURED 1
 # define TRUE 1
 # define FALSE 0
+# define RGB_RED 16777215
 
 /*
 **  key binding

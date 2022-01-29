@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:21:58 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/28 21:15:14 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/29 17:06:05 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,32 @@ double deploy_ray_dda(t_camera *cam, t_ray *ray, int **map)
 	return (define_ray_distance(cam, ray, side));
 }
 
+void render_vertical_line(t_window *win, t_intvec *point, int ray_index)
+{
+	int i;
+	t_pixel **pxlptr;
+
+	i = point->x;
+	pxlptr = win->pixel;
+	while (i < point->y)
+		*(pxlptr[ray_index][i++].color) = RGB_RED;
+}
+
+void draw_wall(double ray_dist, t_window *win, int ray_index)
+{
+	int 		line_h;
+	t_intvec 	drawpoint;
+
+	line_h = (int)(win->h/ ray_dist);
+	drawpoint.x = -line_h / 2 + win->h / 2;
+	if (drawpoint.x < 0)
+		drawpoint.x = 0; 
+	drawpoint.y = line_h / 2 + win->h / 2;
+	if (drawpoint.y >= win->h)
+		drawpoint.y = win->h - 1;
+	render_vertical_line(win, &drawpoint, ray_index);
+}
+
 int cast_ray(t_window *win, t_camera *cam, t_map *map)
 {
 	int 	i;
@@ -101,14 +127,14 @@ int cast_ray(t_window *win, t_camera *cam, t_map *map)
 	
 	i = -1;
 	casted = NULL;
-	while (++i < map->w)
+	while (++i < win->w)
 	{
 		casted = &win->ray[i];
 		init_cam(cam, win->w, i);
 		init_ray_direction(casted, cam);
 		init_step_value(cam, casted);
-		win->ray[i].distance = deploy_ray_dda(cam, casted, map->mtrx);
-		printf("casted's distance at %d : %f\n", i, win->ray[i].distance);
+		casted->distance = deploy_ray_dda(cam, casted, map->mtrx);
+		draw_wall(casted->distance, win, i);
 	}
     return (0);
 }
