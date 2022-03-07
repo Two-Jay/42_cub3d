@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/30 20:31:57 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/07 20:36:07 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,19 @@
 # define TRUE 1
 # define FALSE 0
 # define RGB_RED 16777215
+# define EVENT_KEY_PRESS 2
+# define MOVE_SPEED 0.3
+# define RAD 3
 
 /*
 **  key binding
 */
 # define BUTTON_REDCROSS 0x6d357408
 # define KEY_ESC 0x35
-# define KEY_W 0xd
-# define KEY_S 0x1
-# define KEY_A 0x0
-# define KEY_D 0x2
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
 
 /*
 **  anlge_value
