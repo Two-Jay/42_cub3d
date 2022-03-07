@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/29 16:54:57 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/30 20:31:57 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,11 @@ void set_hooks(t_data *data);
 **	engine_part
 */
 int		render(t_data *data);
-void	put_pixel_img(t_img *img, int x, int y, int color);
-void    put_yline_img(t_window *win, int line_l, int x_pos, int color);
-int     cast_ray(t_window *win, t_camera *plyr, t_map *map);
+int     render_wall(t_window *win, t_camera *cam, t_map *map);
+int     render_background(t_window *win, t_static *parsed);
+void    put_pixel_vertical_line(t_window *win, t_intvec *point, int ray_index);
+int     is_hit_on_wall(int **map_mtrx, int y, int x);
+int     put_image_to_window(t_data *data);
 
 /*
 **	engine - functions for vector calculation 

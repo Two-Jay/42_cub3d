@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_ray.c                                         :+:      :+:    :+:   */
+/*   draw_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:21:58 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/29 17:06:05 by jekim            ###   ########.fr       */
+/*   Updated: 2022/01/30 20:29:17 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int is_hit_on_wall(int **map_mtrx, int y, int x)
-{
-	return (map_mtrx[y][x] == 2);
-}
 
 void init_cam(t_camera *cam, int window_width, int ray_index)
 {
@@ -94,17 +89,6 @@ double deploy_ray_dda(t_camera *cam, t_ray *ray, int **map)
 	return (define_ray_distance(cam, ray, side));
 }
 
-void render_vertical_line(t_window *win, t_intvec *point, int ray_index)
-{
-	int i;
-	t_pixel **pxlptr;
-
-	i = point->x;
-	pxlptr = win->pixel;
-	while (i < point->y)
-		*(pxlptr[ray_index][i++].color) = RGB_RED;
-}
-
 void draw_wall(double ray_dist, t_window *win, int ray_index)
 {
 	int 		line_h;
@@ -117,10 +101,10 @@ void draw_wall(double ray_dist, t_window *win, int ray_index)
 	drawpoint.y = line_h / 2 + win->h / 2;
 	if (drawpoint.y >= win->h)
 		drawpoint.y = win->h - 1;
-	render_vertical_line(win, &drawpoint, ray_index);
+	put_pixel_vertical_line(win, &drawpoint, ray_index);
 }
 
-int cast_ray(t_window *win, t_camera *cam, t_map *map)
+int render_wall(t_window *win, t_camera *cam, t_map *map)
 {
 	int 	i;
 	t_ray	*casted;

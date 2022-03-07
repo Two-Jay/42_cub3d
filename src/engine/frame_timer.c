@@ -1,27 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   frame_timer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 13:59:38 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/05 20:38:39 by jekim            ###   ########.fr       */
+/*   Created: 2022/01/29 22:18:22 by jekim             #+#    #+#             */
+/*   Updated: 2022/01/30 20:31:03 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv, char **env)
-{
-	t_data	*data;
-
-	data = NULL;
-	if (init_game(argc, argv, env, &data))
-		ft_strerr("Error\n");
-	render(data);
-	print_mapmatrix(data->map);
-	set_hooks(data);
-	mlx_loop(data->window->mlx_ptr);
-	return (EXIT_SUCCESS);
-}

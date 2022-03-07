@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_background.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/12 17:11:17 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/14 17:01:21 by jekim            ###   ########.fr       */
+/*   Created: 2022/01/30 20:28:10 by jekim             #+#    #+#             */
+/*   Updated: 2022/01/30 20:29:15 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int is_over_window_xrange(int value, int window_x_range)
+int render_background(t_window *win, t_static *parsed)
 {
-	return (value > window_x_range);
-}
-
-void put_pixel_img(t_img *img, int x, int y, int color)
-{
-	char *dst;
-
-	dst = (char *)img->data_addr + (y * img->size_length + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
-void put_yline_img(t_window *win, int line_l, int x_pos, int color)
-{
-	int ix;
+	int x;
+	int y;
+	t_pixel **pxlptr;
 	
-	ix = 0;
-	while (ix < line_l)
+	pxlptr = win->pixel;
+	y = -1;
+	while (++y <= win->h / 2)
 	{
-		put_pixel_img(win->img, x_pos, ix, color);
-		ix++;
+		x = -1;
+		while (++x < win->w)
+			*(pxlptr[x][y].color) = parsed->F_RGB_value;
 	}
+	while (++y < win->h)
+	{
+		x = -1;
+		while (++x < win->w)
+			*(pxlptr[x][y].color) = parsed->C_RGB_value;
+	}
+	return (0);
 }
