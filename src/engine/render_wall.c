@@ -6,13 +6,13 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:21:58 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/07 21:19:49 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 01:59:50 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void init_cam(t_camera *cam, int window_width, int ray_index)
+void init_camera_dir(t_camera *cam)
 {
 	cam->dir.x = 1;
 	cam->dir.y = 0;
@@ -20,9 +20,6 @@ void init_cam(t_camera *cam, int window_width, int ray_index)
 	cam->plain.y = 0.66;
 	cam->time = 0;
 	cam->old_time = 0;
-	cam->camera_x = 2 * ray_index / (double)window_width - 1;
-	cam->index.x = (int)cam->pos.x;
-	cam->index.y = (int)cam->pos.y;
 }
 
 void init_step_value(t_camera *cam, t_ray *ray)
@@ -104,21 +101,32 @@ void draw_wall(double ray_dist, t_window *win, int ray_index)
 	put_pixel_vertical_line(win, &drawpoint, ray_index);
 }
 
+void init_cameara_index(t_camera *cam, int window_w, int ray_index)
+{
+	cam->camera_x = 2 * ray_index / (double)window_w - 1;
+	cam->index.x = (int)cam->pos.x;
+	cam->index.y = (int)cam->pos.y;
+}
+
 int render_wall(t_window *win, t_camera *cam, t_map *map)
 {
 	int 	i;
+	static	int	not_first;
 	t_ray	*casted;
 	
 	i = -1;
 	casted = NULL;
 	while (++i < win->w)
 	{
+		init_cameara_index(cam, win->w, i);
 		casted = &win->ray[i];
-		init_cam(cam, win->w, i);
+		if (not_first != 1)
+			init_camera_dir(cam);
 		init_ray_direction(casted, cam);
 		init_step_value(cam, casted);
 		casted->distance = deploy_ray_dda(cam, casted, map->mtrx);
 		draw_wall(casted->distance, win, i);
 	}
+	not_first = 1;
     return (0);
 }
