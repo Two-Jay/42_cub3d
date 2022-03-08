@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:21:58 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/29 17:06:05 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 01:11:09 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void draw_wall(double ray_dist, t_window *win, int ray_index)
 int cast_ray(t_window *win, t_camera *cam, t_map *map)
 {
 	int 	i;
+	//static	int	not_first;
 	t_ray	*casted;
 	
 	i = -1;
@@ -130,11 +131,13 @@ int cast_ray(t_window *win, t_camera *cam, t_map *map)
 	while (++i < win->w)
 	{
 		casted = &win->ray[i];
-		init_cam(cam, win->w, i);
+		//if (!not_first)
+			init_cam(cam, win->w, i);
 		init_ray_direction(casted, cam);
 		init_step_value(cam, casted);
 		casted->distance = deploy_ray_dda(cam, casted, map->mtrx);
 		draw_wall(casted->distance, win, i);
 	}
+	//not_first++;
     return (0);
 }

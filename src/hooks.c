@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:08:01 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/07 19:57:03 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/09 01:04:30 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,36 @@ int subcallback_press_move(int code, t_data *data)
 {
 	double	old_dirx;
 	double	old_planex;
-	static	int	frame;
+	double	frame;
+	static	int	time;
+	int		old_time;
 	double	rot_speed;
 
-	rot_speed = RAD * (frame * 0.3);
+	old_time = time++;
+	frame = (time - old_time) / 1000.0;
+	rot_speed = frame * RAD;
 	if (code == KEY_W)
 	{
 		if (data->map->mtrx[(int)(data->camera->pos.y)][(int)(data->camera->pos.x + data->camera->dir.x * MOVE_SPEED)] != 2)
 			data->camera->pos.x += data->camera->dir.x * MOVE_SPEED;
 		if (data->map->mtrx[(int)(data->camera->pos.y + data->camera->dir.y * MOVE_SPEED)][(int)(data->camera->pos.x)] != 2)
 			data->camera->pos.y += data->camera->dir.y * MOVE_SPEED;
+		printf("posX:%lf posY%lf\n", data->camera->pos.x, data->camera->pos.y);
+		printf("dirX:%lf dirY%lf\n", data->camera->dir.x, data->camera->dir.y);
+		printf("planeX:%lf planeY:%lf\n", data->camera->plain.x, data->camera->plain.y);
 	}
 	if (code == KEY_A)
 	{
+		printf("rs: %lf\n", rot_speed);
 		old_dirx = data->camera->dir.x;
 		data->camera->dir.x = data->camera->dir.x * cos(rot_speed) - data->camera->dir.y * sin(rot_speed);
 		data->camera->dir.y = old_dirx * sin(rot_speed) + data->camera->dir.y * cos(rot_speed);
-		printf("%lf %lf\n", data->camera->dir.x, data->camera->dir.y);
 		old_planex = data->camera->plain.x;
 		data->camera->plain.x = cos(rot_speed) - data->camera->plain.y * sin(rot_speed);
 		data->camera->plain.y = old_planex * sin(rot_speed) + data->camera->plain.y * cos(rot_speed);
-		printf("%lf %lf\n", data->camera->plain.x, data->camera->plain.y);
+		printf("posX:%lf posY%lf\n", data->camera->pos.x, data->camera->pos.y);
+		printf("dirX:%lf dirY%lf\n", data->camera->dir.x, data->camera->dir.y);
+		printf("planeX:%lf planeY:%lf\n", data->camera->plain.x, data->camera->plain.y);
 	}
 	if (code == KEY_S)
 	{
@@ -54,21 +63,24 @@ int subcallback_press_move(int code, t_data *data)
 			data->camera->pos.x -= data->camera->dir.x * MOVE_SPEED;
 		if (data->map->mtrx[(int)(data->camera->pos.y - data->camera->dir.y * MOVE_SPEED)][(int)(data->camera->pos.x)] != 2)
 			data->camera->pos.y -= data->camera->dir.y * MOVE_SPEED;
+		printf("posX:%lf posY%lf\n", data->camera->pos.x, data->camera->pos.y);
+		printf("dirX:%lf dirY%lf\n", data->camera->dir.x, data->camera->dir.y);
+		printf("planeX:%lf planeY:%lf\n", data->camera->plain.x, data->camera->plain.y);
 	}
 	if (code == KEY_D)
 	{
+		printf("rs: %lf\n", rot_speed);
 		old_dirx = data->camera->dir.x;
-		printf("%lf\n", cos(-rot_speed));
 		data->camera->dir.x = data->camera->dir.x * cos(-rot_speed) - data->camera->dir.y * sin(-rot_speed);
 		data->camera->dir.y = old_dirx * sin(-rot_speed) + data->camera->dir.y * cos(-rot_speed);
-		printf("%lf %lf\n", data->camera->dir.x, data->camera->dir.y);
 		old_planex = data->camera->plain.x;
 		data->camera->plain.x = cos(-rot_speed) - data->camera->plain.y * sin(-rot_speed);
 		data->camera->plain.y = old_planex * sin(-rot_speed) + data->camera->plain.y * cos(-rot_speed);
-		printf("%lf %lf\n", data->camera->plain.x, data->camera->plain.y);
+		printf("posX:%lf posY%lf\n", data->camera->pos.x, data->camera->pos.y);
+		printf("dirX:%lf dirY%lf\n", data->camera->dir.x, data->camera->dir.y);
+		printf("planeX:%lf planeY:%lf\n", data->camera->plain.x, data->camera->plain.y);
 	}
-	render(data);
-	frame++;
+	printf("render:%d\n",render(data));
 	return (0);
 }
 
