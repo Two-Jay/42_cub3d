@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:08:01 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/07 20:36:18 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/07 21:03:15 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int subcallback_press_move(int code, t_data *data)
 		data->camera->dir.y = old_dirx * sin(rot_speed) + data->camera->dir.y * cos(rot_speed);
 		printf("%lf %lf\n", data->camera->dir.x, data->camera->dir.y);
 		old_planex = data->camera->plain.x;
-		data->camera->plain.x = cos(rot_speed) - data->camera->plain.y * sin(rot_speed);
+		data->camera->plain.x = data->camera->plain.x * cos(rot_speed) - data->camera->plain.y * sin(rot_speed);
 		data->camera->plain.y = old_planex * sin(rot_speed) + data->camera->plain.y * cos(rot_speed);
 		printf("%lf %lf\n", data->camera->plain.x, data->camera->plain.y);
 	}
@@ -60,11 +60,11 @@ int subcallback_press_move(int code, t_data *data)
 		printf("%lf\n", cos(-rot_speed));
 		data->camera->dir.x = data->camera->dir.x * cos(-rot_speed) - data->camera->dir.y * sin(-rot_speed);
 		data->camera->dir.y = old_dirx * sin(-rot_speed) + data->camera->dir.y * cos(-rot_speed);
-		printf("%lf %lf\n", data->camera->dir.x, data->camera->dir.y);
+		// printf("%lf %lf\n", data->camera->dir.x, data->camera->dir.y);
 		old_planex = data->camera->plain.x;
-		data->camera->plain.x = cos(-rot_speed) - data->camera->plain.y * sin(-rot_speed);
+		data->camera->plain.x = data->camera->plain.x * cos(-rot_speed) - data->camera->plain.y * sin(-rot_speed);
 		data->camera->plain.y = old_planex * sin(-rot_speed) + data->camera->plain.y * cos(-rot_speed);
-		printf("%lf %lf\n", data->camera->plain.x, data->camera->plain.y);
+		// printf("%lf %lf\n", data->camera->plain.x, data->camera->plain.y);
 	}
 	render(data);
 	frame++;
@@ -76,7 +76,7 @@ int callback_key(int code, t_data *data)
 	if (code == KEY_W || code == KEY_A || code == KEY_S || code == KEY_D)
 		subcallback_press_move(code, data);
 	if (code == KEY_ESC)
-		subcallback_exit(data);
+		callback_exit(data);
 	return (0);
 }
 
