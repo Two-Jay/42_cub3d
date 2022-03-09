@@ -6,17 +6,17 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:56:03 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/23 16:40:54 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 17:21:21 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int validate_mapdata_border(int **map, t_data *data)
+int	validate_mapdata_border(int **map, t_data *data)
 {
-	int ix;
-	int height;
-	int width;
+	int	ix;
+	int	height;
+	int	width;
 
 	ix = 0;
 	height = data->map->h;
@@ -37,7 +37,7 @@ int validate_mapdata_border(int **map, t_data *data)
 	return (0);
 }
 
-int validate_mapdata_object(t_data *data)
+int	validate_mapdata_object(t_data *data)
 {
 	if (data->parsed_data->N_cnt != 1
 		|| data->parsed_data->space_cnt == 0)

@@ -37,7 +37,8 @@ LIBFT = $(LIBFT_DIR)libft.a
 MINILIBX = $(MLXDIR)libmlx.dylib
 
 SRCFILE =	cub3d.c	\
-			test_function.c	\
+			event_move.c \
+			event_turn.c \
 			init.c \
 			hooks.c
 
@@ -51,10 +52,12 @@ PARSER_FILE		=	mapparser.c \
 					mapparser_validator_space.c 
 
 ENGINE_FILE		=	engine.c \
+					engine_utils.c \
 					render_wall.c \
 					render_background.c \
 					utils.c \
 					vector.c \
+					vector_arithmetic_opreator.c \
 
 
 SRC_OBJ_FILE	=	$(SRCFILE:.c=.o)

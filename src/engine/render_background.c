@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_background.c                                  :+:      :+:    :+:   */
+/*   render_background.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 20:28:10 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/30 20:29:15 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 16:55:52 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int render_background(t_window *win, t_static *parsed)
+int	render_background(t_window *win, t_static *parsed)
 {
-	int x;
-	int y;
-	t_pixel **pxlptr;
-	
+	int		x;
+	int		y;
+	t_pixel	**pxlptr;
+
 	pxlptr = win->pixel;
 	y = -1;
 	while (++y <= win->h / 2)

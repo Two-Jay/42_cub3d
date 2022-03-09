@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/07 20:36:07 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 17:35:50 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define RGB_RED 16777215
 # define EVENT_KEY_PRESS 2
 # define MOVE_SPEED 0.3
-# define RAD 3
+# define ROT_SPEED 0.3
 
 /*
 **  key binding
@@ -85,6 +85,13 @@ int     is_hit_on_wall(int **map_mtrx, int y, int x);
 int     put_image_to_window(t_data *data);
 
 /*
+**	engine_utils
+*/
+void	init_ray_direction(t_ray *ray, t_camera *cam);
+double	define_ray_distance(t_camera *cam, t_ray *ray, int side);
+void	init_camera_dir(t_camera *cam);
+void	init_cameara_index(t_camera *cam, int window_w, int ray_index);
+/*
 **	engine - functions for vector calculation 
 */
 t_vec	vec_create(double x, double y);
@@ -94,5 +101,11 @@ t_vec	vec_scala_mul(t_vec vec, double n);
 t_vec	vec_equation(t_vec *coeff0, t_vec *coeff1, t_vec *constant);
 t_vec	vec_rot_ccw(t_vec a, double angle);
 t_vec	vec_rot_min_ccw(t_vec a);
-
+/*
+**	event
+*/
+void	move_front(t_data *data);
+void	move_back(t_data *data);
+void	turn_left(t_data *data);
+void	turn_right(t_data *data);
 #endif

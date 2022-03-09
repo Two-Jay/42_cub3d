@@ -6,15 +6,15 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:38:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/11/11 08:58:19 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2022/03/09 17:20:14 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int skip_line(int fd, char **map_line, int *line_checker)
+int	skip_line(int fd, char **map_line, int *line_checker)
 {
-	int cnt;
+	int	cnt;
 
 	cnt = 0;
 	*line_checker = ft_strgnl(fd, map_line);
@@ -28,9 +28,9 @@ int skip_line(int fd, char **map_line, int *line_checker)
 	return (0);
 }
 
-void free_splited(char **splited)
+void	free_splited(char **splited)
 {
-	int ix;
+	int	ix;
 
 	ix = -1;
 	if (splited)
@@ -52,9 +52,9 @@ int	get_splited_len(char **splited)
 	return (ix);
 }
 
-char **get_and_check_splited(char *src, char c, int check_l, char *key)
+char	**get_and_check_splited(char *src, char c, int check_l, char *key)
 {
-	char **ret;
+	char	**ret;
 
 	ret = ft_split(src, c);
 	if (ret == NULL

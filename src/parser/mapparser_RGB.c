@@ -6,13 +6,13 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:38:25 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/06 17:51:51 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 17:19:22 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int convet_RGBvalue_to_int(int t, int *parsed)
+static int	convet_RGBvalue_to_int(int t, int *parsed)
 {
 	return (t << 24 | parsed[0] << 16 | parsed[1] << 8 | parsed[2]);
 }
@@ -38,8 +38,8 @@ static char	**get_RGBstr(int fd, char *key)
 
 static int	get_RGBvalue(char **parsed, t_data *data, char key)
 {
-	int	ix;
-	int	ovf_flag;
+	int				ix;
+	int				ovf_flag;
 	unsigned int	value;
 
 	ix = 0;

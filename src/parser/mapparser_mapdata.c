@@ -6,16 +6,16 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:52:55 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/24 19:36:31 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 17:18:41 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void fill_maptile_row(int *arr, char *row, int size)
+static void	fill_maptile_row(int *arr, char *row, int size)
 {
-	int ix;
-	int row_l;
+	int	ix;
+	int	row_l;
 
 	ix = 0;
 	row_l = ft_strlen(row);
@@ -33,12 +33,12 @@ static void fill_maptile_row(int *arr, char *row, int size)
 	}
 }
 
-static int *malloc_mapdata_row(char *row, int width)
+static int	*malloc_mapdata_row(char *row, int width)
 {
-	int *ret;
+	int	*ret;
 	int	ix;
 	int	row_l;
-	
+
 	ix = 0;
 	row_l = ft_strlen(row);
 	ret = (int *)ft_calloc(sizeof(int), (width + 1));
@@ -49,7 +49,7 @@ static int *malloc_mapdata_row(char *row, int width)
 	return (ret);
 }
 
-int convert_mapdata_matrix(t_data *data)
+int	convert_mapdata_matrix(t_data *data)
 {
 	int				**ret;
 	t_mapdata_lst	*lst;
