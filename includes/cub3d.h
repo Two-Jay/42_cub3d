@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/07 20:36:07 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 02:21:49 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define RGB_RED 16777215
 # define EVENT_KEY_PRESS 2
 # define MOVE_SPEED 0.3
-# define RAD 3
+# define ROT_SPEED 0.3
 
 /*
 **  key binding
