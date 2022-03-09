@@ -6,13 +6,13 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 00:57:04 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/28 00:26:41 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 17:25:27 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int check_mappoint(int **map, int ix, int jx)
+static int	check_mappoint(int **map, int ix, int jx)
 {
 	if (map[ix - 1][jx - 1] == 0
 		|| map[ix - 1][jx] == 0
@@ -26,7 +26,7 @@ static int check_mappoint(int **map, int ix, int jx)
 	return (0);
 }
 
-static void count_space_type(int point, t_data *data)
+static void	count_space_type(int point, t_data *data)
 {
 	if (point == 1)
 		data->parsed_data->space_cnt++;
@@ -40,7 +40,7 @@ static void count_space_type(int point, t_data *data)
 		data->parsed_data->W_cnt++;
 }
 
-static void set_count_bucket(t_data *data)
+static void	set_count_bucket(t_data *data)
 {
 	data->parsed_data->space_cnt = 0;
 	data->parsed_data->N_cnt = 0;
@@ -49,11 +49,17 @@ static void set_count_bucket(t_data *data)
 	data->parsed_data->W_cnt = 0;
 }
 
-int validate_mapdata_space(int **map, t_data *data)
+static void	set_pos(t_data *data, int ix, int jx)
 {
-	int checker;
+	data->camera->pos.x = (double)jx;
+	data->camera->pos.y = (double)ix;
+}
+
+int	validate_mapdata_space(int **map, t_data *data)
+{
+	int	checker;
 	int	ix;
-	int jx;
+	int	jx;
 
 	ix = 1;
 	set_count_bucket(data);
@@ -63,13 +69,10 @@ int validate_mapdata_space(int **map, t_data *data)
 		while (jx < data->map->w - 1)
 		{
 			count_space_type(map[ix][jx], data);
-			if (map[ix][jx] != 0 && map[ix][jx] != 2) 
+			if (map[ix][jx] != 0 && map[ix][jx] != 2)
 				checker = check_mappoint(map, ix, jx);
 			if (map[ix][jx] == 3)
-			{
-				data->camera->pos.x = (double)jx;
-				data->camera->pos.y = (double)ix;
-			}
+				set_pos(data, ix, jx);
 			if (checker)
 				return (1);
 			jx++;

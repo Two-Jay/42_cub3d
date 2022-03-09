@@ -6,23 +6,13 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:21:58 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/09 01:59:50 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 17:05:10 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void init_camera_dir(t_camera *cam)
-{
-	cam->dir.x = 1;
-	cam->dir.y = 0;
-	cam->plain.x = 0;
-	cam->plain.y = 0.66;
-	cam->time = 0;
-	cam->old_time = 0;
-}
-
-void init_step_value(t_camera *cam, t_ray *ray)
+void	init_step_value(t_camera *cam, t_ray *ray)
 {
 	cam->deltaDist.x = fabs(1 / ray->dir.x);
 	cam->deltaDist.y = fabs(1 / ray->dir.y);
@@ -38,7 +28,7 @@ void init_step_value(t_camera *cam, t_ray *ray)
 	}
 	if (ray->dir.y < 0)
 	{
-		cam->step.y = -1; 
+		cam->step.y = -1;
 		cam->sideDist.y = (cam->pos.y - cam->index.y) * cam->deltaDist.y;
 	}
 	else
@@ -48,24 +38,10 @@ void init_step_value(t_camera *cam, t_ray *ray)
 	}
 }
 
-void init_ray_direction(t_ray *ray, t_camera *cam)
+double	deploy_ray_dda(t_camera *cam, t_ray *ray, int **map)
 {
-	ray->dir.x = cam->dir.x + cam->plain.x * cam->camera_x;
-	ray->dir.y = cam->dir.y + cam->plain.y * cam->camera_x;
-}
+	int	side;
 
-double define_ray_distance(t_camera *cam, t_ray *ray, int side)
-{
-	if (side == 0)
-		return ((cam->index.x - cam->pos.x + (1 - cam->step.x) / 2) / ray->dir.x);
-	else
-		return ((cam->index.y - cam->pos.y + (1 - cam->step.y) / 2) / ray->dir.y);
-}
-
-double deploy_ray_dda(t_camera *cam, t_ray *ray, int **map)
-{
-	int side;
-	
 	while (TRUE)
 	{
 		if (cam->sideDist.x < cam->sideDist.y)
@@ -86,34 +62,27 @@ double deploy_ray_dda(t_camera *cam, t_ray *ray, int **map)
 	return (define_ray_distance(cam, ray, side));
 }
 
-void draw_wall(double ray_dist, t_window *win, int ray_index)
+void	draw_wall(double ray_dist, t_window *win, int ray_index)
 {
-	int 		line_h;
-	t_intvec 	drawpoint;
+	int			line_h;
+	t_intvec	drawpoint;
 
-	line_h = (int)(win->h/ ray_dist);
+	line_h = (int)(win->h / ray_dist);
 	drawpoint.x = -line_h / 2 + win->h / 2;
 	if (drawpoint.x < 0)
-		drawpoint.x = 0; 
+		drawpoint.x = 0;
 	drawpoint.y = line_h / 2 + win->h / 2;
 	if (drawpoint.y >= win->h)
 		drawpoint.y = win->h - 1;
 	put_pixel_vertical_line(win, &drawpoint, ray_index);
 }
 
-void init_cameara_index(t_camera *cam, int window_w, int ray_index)
+int	render_wall(t_window *win, t_camera *cam, t_map *map)
 {
-	cam->camera_x = 2 * ray_index / (double)window_w - 1;
-	cam->index.x = (int)cam->pos.x;
-	cam->index.y = (int)cam->pos.y;
-}
+	int			i;
+	static int	not_first;
+	t_ray		*casted;
 
-int render_wall(t_window *win, t_camera *cam, t_map *map)
-{
-	int 	i;
-	static	int	not_first;
-	t_ray	*casted;
-	
 	i = -1;
 	casted = NULL;
 	while (++i < win->w)
@@ -128,5 +97,5 @@ int render_wall(t_window *win, t_camera *cam, t_map *map)
 		draw_wall(casted->distance, win, i);
 	}
 	not_first = 1;
-    return (0);
+	return (0);
 }

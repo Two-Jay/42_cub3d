@@ -6,13 +6,13 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/23 16:41:05 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 17:17:23 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char *get_abspath_prefix(char **env)
+char	*get_abspath_prefix(char **env)
 {
 	int	ix;
 
@@ -68,7 +68,7 @@ int	run_mapfile(char *filepath, char **env)
 	return (fd_check);
 }
 
-int clear_mapdata_lst(t_mapdata_lst *lst, t_data *data)
+int	clear_mapdata_lst(t_mapdata_lst *lst, t_data *data)
 {
 	t_mapdata_lst	*tmp;
 	int				ix;
@@ -102,4 +102,3 @@ int	parse_mapfile(char *filepath, char **env, t_data *data)
 		return (close(map_fd) || ft_strerr("Error : invalid map data\n"));
 	return (close(map_fd));
 }
-

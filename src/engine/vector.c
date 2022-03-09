@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:16:18 by jekim             #+#    #+#             */
-/*   Updated: 2021/12/28 23:15:01 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 17:14:44 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,17 @@
 
 t_vec	vec_create(double x, double y)
 {
-	t_vec ret;
+	t_vec	ret;
 
 	ret.x = x;
 	ret.y = y;
 	return (ret);
 }
 
-t_vec	vec_add(t_vec vec1, t_vec vec2)
-{
-	vec1.x = vec1.x + vec2.x;
-	vec1.y = vec1.y + vec2.y;
-	return (vec1);
-}
-
-t_vec	vec_minus(t_vec vec1, t_vec vec2)
-{
-	vec1.x = vec1.x - vec2.x;
-	vec1.y = vec1.y - vec2.y;
-	return (vec1);
-}
-
-t_vec	vec_scala_mul(t_vec vec, double n)
-{
-	vec.x = vec.x * n;
-	vec.y = vec.y * n;
-	return (vec);
-}
-
 t_vec	vec_equation(t_vec *coeff0, t_vec *coeff1, t_vec *constant)
 {
-	t_vec ret;
-	double det;
+	t_vec	ret;
+	double	det;
 
 	det = coeff0->x * coeff1->y - coeff1->x * coeff0->y;
 	ret.x = (coeff1->y * constant->x - coeff1->x * constant->y) / det;
@@ -58,7 +37,7 @@ t_vec	vec_rot_ccw(t_vec a, double angle)
 	double	sin_angle;
 	double	cos_angle;
 	t_vec	ret;
-	
+
 	sin_angle = sin(angle);
 	cos_angle = cos(angle);
 	ret.x = cos_angle * a.x - sin_angle * a.y;

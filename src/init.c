@@ -6,22 +6,22 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 01:04:55 by jekim             #+#    #+#             */
-/*   Updated: 2022/01/28 00:26:41 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/09 16:48:40 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int get_basic_screen_size(int *x_ptr, int *y_ptr)
+int	get_basic_screen_size(int *x_ptr, int *y_ptr)
 {
 	*x_ptr = 800;
 	*y_ptr = 640;
 	return (0);
 }
 
-t_pixel **init_pixel(int w, int h, t_img *img)
+t_pixel	**init_pixel(int w, int h, t_img *img)
 {
-	t_pixel **ret;
+	t_pixel	**ret;
 	int		x;
 	int		y;
 
@@ -35,13 +35,13 @@ t_pixel **init_pixel(int w, int h, t_img *img)
 		{
 			ret[x][y].distance = INFINITY;
 			ret[x][y].color = (unsigned int *)((char *)img->data_addr
-				+ img->size_length * y + img->bpp / 8 * x);
+					+ img->size_length * y + img->bpp / 8 * x);
 		}
 	}
 	return (ret);
 }
 
-int init_window(t_window *win)
+int	init_window(t_window *win)
 {
 	win->mlx_ptr = mlx_init();
 	mlx_get_screen_size(win->mlx_ptr, &win->max_w, &win->max_h);
@@ -56,7 +56,7 @@ int init_window(t_window *win)
 	return (0);
 }
 
-int init_struct(t_data **data)
+int	init_struct(t_data **data)
 {
 	(*data) = (t_data *)ft_calloc(sizeof(t_data), 1);
 	if (data == NULL)
@@ -75,7 +75,7 @@ int init_struct(t_data **data)
 	return (0);
 }
 
-int init_game(int argc, char **argv, char **env, t_data **data)
+int	init_game(int argc, char **argv, char **env, t_data **data)
 {
 	if (argc != 2)
 		ft_strerr("Error : no parameter\n");
