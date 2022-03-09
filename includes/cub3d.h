@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/09 17:35:50 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/09 18:01:11 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define KEY_S 1
 # define KEY_A 0
 # define KEY_D 2
+# define KEY_Q 12
+# define KEY_E 14
 
 /*
 **  anlge_value
@@ -106,6 +108,8 @@ t_vec	vec_rot_min_ccw(t_vec a);
 */
 void	move_front(t_data *data);
 void	move_back(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
 void	turn_left(t_data *data);
 void	turn_right(t_data *data);
 #endif
