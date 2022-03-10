@@ -1,7 +1,7 @@
-NO ../src/texture/NO_image
-SO ../src/texture/SO_image
-WE ../src/texture/WE_image
-EA ../src/texture/EA_image
+NO ./texture/NO_image.png
+SO ./texture/SO_image.png
+WE ./texture/WE_image.png
+EA ./texture/EA_image.png
 
 F 184,228,248
 C 170,131,92
