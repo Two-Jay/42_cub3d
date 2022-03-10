@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/09 18:01:11 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/11 03:20:34 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@
 # define KEY_ESC 0x35
 # define KEY_W 13
 # define KEY_S 1
+# define KEY_LFT 123
+# define KEY_RGT 124
 # define KEY_A 0
 # define KEY_D 2
-# define KEY_Q 12
-# define KEY_E 14
 
 /*
 **  anlge_value
