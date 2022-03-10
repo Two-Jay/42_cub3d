@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:08:01 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/09 18:02:06 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/11 03:21:26 by gilee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ int	subcallback_press_move(int code, t_data *data)
 {
 	if (code == KEY_W)
 		move_front(data);
-	if (code == KEY_D)
+	if (code == KEY_RGT)
 		turn_right(data);
 	if (code == KEY_S)
 		move_back(data);
-	if (code == KEY_A)
+	if (code == KEY_LFT)
 		turn_left(data);
-	if (code == KEY_Q)
+	if (code == KEY_A)
 		move_left(data);
-	if (code == KEY_E)
+	if (code == KEY_D)
 		move_right(data);
 	render(data);
 	return (0);
@@ -42,7 +42,7 @@ int	subcallback_press_move(int code, t_data *data)
 int	callback_key(int code, t_data *data)
 {
 	if (code == KEY_W || code == KEY_A
-		|| code == KEY_Q || code == KEY_E
+		|| code == KEY_RGT || code == KEY_LFT
 		|| code == KEY_S || code == KEY_D)
 		subcallback_press_move(code, data);
 	if (code == KEY_ESC)
