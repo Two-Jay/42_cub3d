@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:21:58 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/12 16:45:17 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/12 21:47:34 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	draw_wall(double ray_dist, t_window *win, int ray_index)
 	put_pixel_vertical_line(win, &drawpoint, ray_index);
 }
 
-int	render_wall(t_window *win, t_camera *cam, t_map *map)
+int	render_wall(t_data *data)
 {
 	int			i;
 	static int	not_first;
@@ -83,16 +83,17 @@ int	render_wall(t_window *win, t_camera *cam, t_map *map)
 
 	i = -1;
 	casted = NULL;
-	while (++i < win->w)
+	while (++i < data->window->w)
 	{
-		init_cameara_index(cam, win->w, i);
-		casted = &win->ray[i];
+		init_cameara_index(data->camera, data->window->w, i);
+		casted = &data->window->ray[i];
 		if (not_first != 1)
-			init_camera_dir(cam);
-		init_ray_direction(casted, cam);
-		init_step_value(cam, casted);
-		casted->distance = deploy_ray_dda(cam, casted, map->mtrx);
-		draw_wall(casted->distance, win, i);
+			init_camera_dir(data->camera);
+		init_ray_direction(casted, data->camera);
+		init_step_value(data->camera, casted);
+		casted->distance = deploy_ray_dda(data->camera,
+				casted, data->map->mtrx);
+		draw_wall(casted->distance,data->window, i);
 	}
 	not_first = 1;
 	return (0);

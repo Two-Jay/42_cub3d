@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/12 15:38:15 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/12 21:39:15 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void set_hooks(t_data *data);
 **	engine_part
 */
 int		render(t_data *data);
-int     render_wall(t_window *win, t_camera *cam, t_map *map);
+int     render_wall(t_data *data);
 int     render_background(t_window *win, t_static *parsed);
 void    put_pixel_vertical_line(t_window *win, t_intvec *point, int ray_index);
 int     is_hit_on_wall(int **map_mtrx, int y, int x);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 19:08:04 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/09 16:49:45 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/12 21:38:57 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	render(t_data *data)
 {
 	if (put_image_to_window(data)
 		|| render_background(data->window, data->parsed_data)
-		|| render_wall(data->window, data->camera, data->map))
+		|| render_wall(data))
 		return (ERROR_OCCURED);
 	return (0);
 }
