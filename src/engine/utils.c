@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 20:35:47 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/09 17:10:04 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/12 16:06:14 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+// needed fix to load texture here
 void	put_pixel_vertical_line(t_window *win, t_intvec *point, int ray_index)
 {
 	int		i;
