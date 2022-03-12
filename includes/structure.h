@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/12 15:45:08 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/12 16:38:42 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_camera
 	t_intvec	index;
 	t_vec		sideDist;
 	t_vec		deltaDist;
+	int			side;
 	double 		camera_x;
 	double 		time;
 	double 		old_time;

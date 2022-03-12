@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gilee <gilee@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 17:04:19 by gilee             #+#    #+#             */
-/*   Updated: 2022/03/09 17:07:11 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/12 16:41:01 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_camera_dir(t_camera *cam)
 	cam->plain.y = 0.66;
 	cam->time = 0;
 	cam->old_time = 0;
+	cam->side = 0;
 }
 
 void	init_cameara_index(t_camera *cam, int window_w, int ray_index)

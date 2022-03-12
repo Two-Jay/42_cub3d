@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:21:58 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/09 17:05:10 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/12 16:45:17 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,24 @@ void	init_step_value(t_camera *cam, t_ray *ray)
 
 double	deploy_ray_dda(t_camera *cam, t_ray *ray, int **map)
 {
-	int	side;
-
-	while (TRUE)
+	while (1)
 	{
 		if (cam->sideDist.x < cam->sideDist.y)
 		{
 			cam->sideDist.x += cam->deltaDist.x;
 			cam->index.x += cam->step.x;
-			side = 0;
+			cam->side = 0;
 		}
 		else
 		{
 			cam->sideDist.y += cam->deltaDist.y;
 			cam->index.y += cam->step.y;
-			side = 1;
+			cam->side = 1;
 		}
 		if (is_hit_on_wall(map, cam->index.y, cam->index.x))
 			break ;
 	}
-	return (define_ray_distance(cam, ray, side));
+	return (define_ray_distance(cam, ray, cam->side));
 }
 
 void	draw_wall(double ray_dist, t_window *win, int ray_index)
