@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 02:58:51 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/11 03:50:55 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/12 15:35:17 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	parse_mapfile(char *filepath, char **env, t_data *data)
 	if (parse_all_imagepaths(map_fd, data)
 		|| parse_all_RGBvalue(map_fd, data)
 		|| parse_mapfile_rawdata(map_fd, data)
+		|| load_imgs(data->window->mlx_ptr, data->map, data->parsed_data)
 		|| convert_mapdata_matrix(data)
 		|| validate_mapdata_border(data->map->mtrx, data)
 		|| validate_mapdata_space(data->map->mtrx, data)

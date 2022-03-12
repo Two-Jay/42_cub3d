@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/11 03:20:34 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/12 15:38:15 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int parse_mapfile(char *filepath, char** env, t_data *data);
 int	parse_all_RGBvalue(int map_fd, t_data *data);
 int	parse_all_imagepaths(int map_fd, t_data *data);
 int	parse_mapfile_rawdata(int map_fd, t_data *data);
+int	load_imgs(void *mlxptr, t_map *map, t_static *parsed);
 int convert_mapdata_matrix(t_data *data);
 int validate_mapdata_space(int **map, t_data *data);
 int validate_mapdata_object(t_data *data);

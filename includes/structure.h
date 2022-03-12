@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/11 03:51:35 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/12 15:45:08 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ typedef struct s_img
 	int				endian;
 }	t_img;
 
+typedef struct	s_texture
+{
+	t_img		img;
+	int			w;
+	int			h;
+}	t_texture;
+
 typedef struct	s_window
 {
 	int 			max_w;
@@ -106,6 +113,7 @@ typedef struct s_map
 	int				w;
 	int				h;
 	int				**mtrx;
+	t_texture		*txtr;
 }	t_map;
 
 typedef struct s_data
