@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:21:58 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/12 21:52:49 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/12 22:13:54 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ double	deploy_ray_dda(t_camera *cam, t_ray *ray, int **map)
 	return (define_ray_distance(cam, ray, cam->side));
 }
 
-void	draw_wall(double ray_dist, t_data *data, int ray_index)
+void	draw_wall(double ray_dist, t_data *data, int ray_index, t_ray *casted)
 {
 	int			line_h;
 	t_intvec	drawpoint;
@@ -72,7 +72,7 @@ void	draw_wall(double ray_dist, t_data *data, int ray_index)
 	drawpoint.y = line_h / 2 + data->window->h / 2;
 	if (drawpoint.y >= data->window->h)
 		drawpoint.y = data->window->h - 1;
-	put_pixel_vertical_line(data->window, &drawpoint, ray_index);
+	put_texture_vertical_line(data, casted, line_h, &drawpoint, ray_index);
 }
 
 int	render_wall(t_data *data)
@@ -93,7 +93,7 @@ int	render_wall(t_data *data)
 		init_step_value(data->camera, casted);
 		casted->distance = deploy_ray_dda(data->camera,
 				casted, data->map->mtrx);
-		draw_wall(casted->distance, data, i);
+		draw_wall(casted->distance, data, i, casted);
 	}
 	not_first = 1;
 	return (0);

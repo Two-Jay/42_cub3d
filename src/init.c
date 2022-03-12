@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 01:04:55 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/11 04:10:13 by gilee            ###   ########.fr       */
+/*   Updated: 2022/03/12 22:36:28 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	init_window(t_window *win)
 	get_basic_screen_size(&win->w, &win->h);
 	win->win_ptr = mlx_new_window(win->mlx_ptr, win->w, win->h, "cub3.d");
 	win->img->img_ptr = mlx_new_image(win->mlx_ptr, win->w, win->h);
-	win->img->data_addr = (unsigned int *)mlx_get_data_addr(win->img->img_ptr,
+	win->img->data_addr = mlx_get_data_addr(win->img->img_ptr,
 			&win->img->bpp, &win->img->size_length, &win->img->endian);
 	win->pixel = init_pixel(win->w, win->h, win->img);
 	win->distance = 1 / tan(FOV / 2) * win->w / 2;

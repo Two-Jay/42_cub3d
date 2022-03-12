@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/12 16:38:42 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/12 22:22:56 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_static
 typedef struct s_img
 {
 	void			*img_ptr;
-	unsigned int	*data_addr;
+	char			*data_addr;
 	int				size_length;
 	int				bpp;
 	int				endian;

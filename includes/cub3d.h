@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/12 21:39:15 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/12 22:14:20 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void set_hooks(t_data *data);
 int		render(t_data *data);
 int     render_wall(t_data *data);
 int     render_background(t_window *win, t_static *parsed);
+void	put_texture_vertical_line(t_data *data, t_ray *casted, int line_h, t_intvec *drawpoint, int ray_index);
 void    put_pixel_vertical_line(t_window *win, t_intvec *point, int ray_index);
 int     is_hit_on_wall(int **map_mtrx, int y, int x);
 int     put_image_to_window(t_data *data);
