@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 20:35:47 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/14 02:54:34 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 03:03:37 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	put_pixel_vertical_line(t_window *win, t_intvec *point, int ray_index)
 int		assign_texNum(int side, t_ray* casted)
 {
 	if (side == 0 && casted->dir.x > 0)
-		return (NO);
+		return (EA);
 	if (side == 1 && casted->dir.y < 0)
-		return (SO);
+		return (NO);
 	if (side == 0 && casted->dir.x < 0)
 		return (WE);
 	if (side == 1 && casted->dir.y > 0)
-		return (EA);
+		return (SO);
 	return (0);
 }
 
