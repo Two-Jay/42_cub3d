@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/12 22:22:56 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/13 14:12:26 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_camera
 	t_vec		sideDist;
 	t_vec		deltaDist;
 	int			side;
+	int			spwandir;
 	double 		camera_x;
 	double 		time;
 	double 		old_time;
@@ -70,10 +71,7 @@ typedef struct s_static
 	int						*C_RGB;
 	unsigned int			C_RGB_value;
 	int						space_cnt;
-	int						N_cnt;
-	int						S_cnt;
-	int						E_cnt;
-	int						W_cnt;
+	int						spwanpoint_cnt;
 	struct s_mapdata_lst	*rawdata;
 }	t_static;
 

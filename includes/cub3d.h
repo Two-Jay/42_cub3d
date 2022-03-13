@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/12 22:14:20 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/13 15:43:39 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,22 @@
 # define KEY_D 2
 
 /*
+**  key binding
+*/
+# define MAPTILE_OUTSPACE 0
+# define MAPTILE_INNERSPACE 1
+# define MAPTILE_WALL 2
+# define MAPTILE_SPWAN 3
+
+/*
 **  anlge_value
 */
 # define ANGLE_MIN 5
 # define FOV 66
+# define SPWAN_NO 1
+# define SPWAN_SO 2
+# define SPWAN_WE 4
+# define SPWAN_EA 8
 
 /*
 **	initiation_part
@@ -114,4 +126,7 @@ void	move_left(t_data *data);
 void	move_right(t_data *data);
 void	turn_left(t_data *data);
 void	turn_right(t_data *data);
+
+int print_mapmatrix(t_map *map);
+
 #endif
