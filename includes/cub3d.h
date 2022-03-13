@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/14 01:21:02 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 02:25:15 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,15 @@
 */
 # define ANGLE_MIN 5
 # define FOV 66
+
+
+/*
+**  texture_index & spwan_direction binding
+*/
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
 # define SPWAN_NO 1
 # define SPWAN_SO 2
 # define SPWAN_WE 4
