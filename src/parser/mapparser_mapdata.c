@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:52:55 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/14 01:25:40 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 02:32:15 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void define_spwan_direction(char position_value, int *direction_flag)
 		*direction_flag |= SPWAN_WE;
 }
 
-static void	fill_maptile_row(int *arr, char *row, int size, int *direction_flag)
+static void	fill_maptile_row(int *arr, char *row, int size, int *dir_flag)
 {
 	int	ix;
 	int	row_l;
@@ -37,10 +37,11 @@ static void	fill_maptile_row(int *arr, char *row, int size, int *direction_flag)
 			arr[ix] = 1;
 		else if (row[ix] == '1')
 			arr[ix] = 2;
-		else if (row[ix] == 'N' || row[ix] == 'S' || row[ix] == 'W' || row[ix] == 'E')
+		else if (row[ix] == 'N' || row[ix] == 'S'
+			|| row[ix] == 'W' || row[ix] == 'E')
 		{
 			arr[ix] = 3;
-			define_spwan_direction(row[ix], direction_flag);
+			define_spwan_direction(row[ix], dir_flag);
 		}
 		ix++;
 	}

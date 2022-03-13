@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:21:58 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/14 01:35:25 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 02:39:21 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@ void	draw_wall(double ray_dist, t_data *data, int ray_index, t_ray *casted)
 	put_texture_vertical_line(data, casted, line_h, &drawpoint, ray_index);
 }
 
+void camera_logger(t_camera *cam)
+{
+	printf("-----------------------------------\n");
+	printf("dir [ x - %lf, y - %lf]\n", cam->dir.x, cam->dir.y);
+	printf("plane [ x - %lf, y - %lf]\n", cam->plain.x, cam->plain.y);
+	printf("side - %d\n", cam->side);
+}
+
 int	render_wall(t_data *data)
 {
 	int			i;
@@ -84,6 +92,10 @@ int	render_wall(t_data *data)
 	casted = NULL;
 	while (++i < data->window->w)
 	{
+		if (i == data->window->w / 2)
+		{
+			camera_logger(data->camera);
+		}
 		init_camera_struct(data->camera, data->window->w, i);
 		casted = &data->window->ray[i];
 		init_ray_direction(casted, data->camera);

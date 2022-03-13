@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 20:35:47 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/12 22:45:56 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 02:54:34 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,26 @@ void	put_pixel_vertical_line(t_window *win, t_intvec *point, int ray_index)
 		*(pxlptr[ray_index][i++].color) = RGB_RED;
 }
 
+int		assign_texNum(int side, t_ray* casted)
+{
+	if (side == 0 && casted->dir.x > 0)
+		return (NO);
+	if (side == 1 && casted->dir.y < 0)
+		return (SO);
+	if (side == 0 && casted->dir.x < 0)
+		return (WE);
+	if (side == 1 && casted->dir.y > 0)
+		return (EA);
+	return (0);
+}
+
 void	put_texture_vertical_line(t_data *data, t_ray *casted, int line_h, t_intvec *drawpoint, int ray_index)
 {
-	// int texNum = *(map->mtrx[cam->index.y, cam->index.y]) - 2;
 	int texNum;
 	t_intvec texIndex;
 	double wallX;
 
-	texNum = 0;
+	texNum = assign_texNum(data->camera->side, casted);
 	if (data->camera->side == 0)
 		wallX = data->camera->pos.y + casted->distance + casted->dir.y;
 	else
@@ -48,14 +60,14 @@ void	put_texture_vertical_line(t_data *data, t_ray *casted, int line_h, t_intvec
 
 	int i;
 	int texHeight = data->map->txtr[texNum].h;
-	uint32_t color;
+	unsigned int color;
 
 	i = drawpoint->x;
 	while (i < drawpoint->y)
 	{
 		texIndex.y = (int)texPos & (texHeight - 1);
 		texPos += step;
-		color = data->map->txtr[texNum].img.data_addr[texHeight * texIndex.y + texIndex.x];
+		color = data->map->txtr[texNum].rowdata[texHeight * texIndex.y + texIndex.x];
 		*(data->window->pixel[ray_index][i].color) = color;
 		i++;
 	}
