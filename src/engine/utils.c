@@ -6,73 +6,33 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 20:35:47 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/14 03:03:37 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 04:41:52 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-// needed fix to load texture here
-void	put_pixel_vertical_line(t_window *win, t_intvec *point, int ray_index)
+void	draw_texture_vertical_line(t_window *win,
+			t_texture_drawing_pack *tdp, int ray_index)
 {
-	int		i;
-	t_pixel	**pxlptr;
-
-	i = point->x;
-	pxlptr = win->pixel;
-	while (i < point->y)
-		*(pxlptr[ray_index][i++].color) = RGB_RED;
-}
-
-int		assign_texNum(int side, t_ray* casted)
-{
-	if (side == 0 && casted->dir.x > 0)
-		return (EA);
-	if (side == 1 && casted->dir.y < 0)
-		return (NO);
-	if (side == 0 && casted->dir.x < 0)
-		return (WE);
-	if (side == 1 && casted->dir.y > 0)
-		return (SO);
-	return (0);
-}
-
-void	put_texture_vertical_line(t_data *data, t_ray *casted, int line_h, t_intvec *drawpoint, int ray_index)
-{
-	int texNum;
-	t_intvec texIndex;
-	double wallX;
-
-	texNum = assign_texNum(data->camera->side, casted);
-	if (data->camera->side == 0)
-		wallX = data->camera->pos.y + casted->distance + casted->dir.y;
-	else
-		wallX = data->camera->pos.x + casted->distance + casted->dir.x;
-	wallX -= floor(wallX);
-	texIndex.x = (int)(wallX * (double)(data->map->txtr[texNum].w));
-	if (data->camera->side == 0 && casted->dir.x > 0)
-		texIndex.x = data->map->txtr[texNum].w - texIndex.x - 1;
-	if (data->camera->side == 1 && casted->dir.y < 0)
-		texIndex.x = data->map->txtr[texNum].w - texIndex.x - 1;
-
-	double step = 1.0 * data->map->txtr[texNum].h / line_h;
-	double texPos = (drawpoint->x / data->window->h) * step;
-
+	double step;
+	double texPos;
 	int i;
-	int texHeight = data->map->txtr[texNum].h;
-	unsigned int color;
+	int texHeight;
 
-	i = drawpoint->x;
-	while (i < drawpoint->y)
+	step = 1.0 * tdp->txtr_ptr->h / tdp->line_h;
+	texPos = (tdp->yAxis_drawIndex.x - win->h / 2 + tdp->line_h / 2) * step;
+	texHeight = tdp->txtr_ptr->h;
+	i = tdp->yAxis_drawIndex.x;
+	while (i < tdp->yAxis_drawIndex.y)
 	{
-		texIndex.y = (int)texPos & (texHeight - 1);
+		tdp->txtr_drawIdx.y = (int)texPos & (texHeight - 1);
 		texPos += step;
-		color = data->map->txtr[texNum].rowdata[texHeight * texIndex.y + texIndex.x];
-		*(data->window->pixel[ray_index][i].color) = color;
+		*(win->pixel[ray_index][i].color) = tdp->txtr_ptr->rowdata[texHeight *
+				tdp->txtr_drawIdx.y + tdp->txtr_drawIdx.x];
 		i++;
 	}
 }
-
 
 int	is_hit_on_wall(int **map_mtrx, int y, int x)
 {

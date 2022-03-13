@@ -54,6 +54,7 @@ PARSER_FILE		=	mapparser.c \
 ENGINE_FILE		=	engine.c \
 					engine_utils.c \
 					render_wall.c \
+					render_wall1.c \
 					render_background.c \
 					utils.c \
 					vector.c \

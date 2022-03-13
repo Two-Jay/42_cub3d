@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/14 02:12:04 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 04:30:37 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_mapdata_lst
 	char *row;
 	struct s_mapdata_lst	*next;
 }	t_mapdata_lst;
+
+
 
 typedef struct s_camera
 {
@@ -123,6 +125,14 @@ typedef struct s_data
 	struct s_static *parsed_data;
 }	t_data;
 
-
+typedef struct s_texture_drawing_pack
+{
+	int			line_h;
+	t_texture	*txtr_ptr;
+	t_ray		*casted;
+	t_intvec	yAxis_drawIndex;
+	t_intvec	txtr_drawIdx;
+	double		wall_x;
+}	t_texture_drawing_pack;
 
 #endif
