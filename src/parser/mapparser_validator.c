@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:56:03 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/13 15:41:04 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/13 16:17:18 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	validate_mapdata_border(int **map, t_data *data)
 
 int	validate_mapdata_object(t_data *data)
 {
-	printf("check");
 	if (data->parsed_data->spwanpoint_cnt != 1
 		|| data->parsed_data->space_cnt == 0)
 		return (ERROR_OCCURED);

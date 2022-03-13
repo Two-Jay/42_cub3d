@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:21:58 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/12 22:13:54 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 01:35:25 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,19 @@ void	draw_wall(double ray_dist, t_data *data, int ray_index, t_ray *casted)
 int	render_wall(t_data *data)
 {
 	int			i;
-	static int	not_first;
 	t_ray		*casted;
 
 	i = -1;
 	casted = NULL;
 	while (++i < data->window->w)
 	{
-		init_cameara_index(data->camera, data->window->w, i);
+		init_camera_struct(data->camera, data->window->w, i);
 		casted = &data->window->ray[i];
-		if (not_first != 1)
-			init_camera_dir(data->camera);
 		init_ray_direction(casted, data->camera);
 		init_step_value(data->camera, casted);
 		casted->distance = deploy_ray_dda(data->camera,
 				casted, data->map->mtrx);
 		draw_wall(casted->distance, data, i, casted);
 	}
-	not_first = 1;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 17:23:08 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/13 14:12:26 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 01:01:12 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef struct s_camera
 	int			side;
 	int			spwandir;
 	double 		camera_x;
-	double 		time;
-	double 		old_time;
 }	t_camera;
 
 typedef struct s_static

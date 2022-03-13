@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:52:55 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/13 14:19:11 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 01:25:40 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void define_spwan_direction(char position_value, int *direction_flag)
 		*direction_flag |= SPWAN_SO;
 	else if (position_value == 'E')
 		*direction_flag |= SPWAN_EA;
-	else if (position_value == 'N')
+	else if (position_value == 'W')
 		*direction_flag |= SPWAN_WE;
 }
 

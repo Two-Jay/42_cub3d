@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/13 15:43:39 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 01:21:02 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ int     put_image_to_window(t_data *data);
 */
 void	init_ray_direction(t_ray *ray, t_camera *cam);
 double	define_ray_distance(t_camera *cam, t_ray *ray, int side);
-void	init_camera_dir(t_camera *cam);
-void	init_cameara_index(t_camera *cam, int window_w, int ray_index);
+void	init_camera_struct(t_camera *cam, int window_w, int ray_index);
+
 /*
 **	engine - functions for vector calculation 
 */
