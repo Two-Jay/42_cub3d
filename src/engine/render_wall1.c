@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_wall1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 04:45:02 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/14 04:46:22 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/14 17:31:37 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static t_texture *init_texture_to_draw(int side,
                                         t_ray* casted,
                                         t_texture *txtr_arr)
 {
-	if (side == 0 && casted->dir.x > 0)
+	if (side == 0 && casted->dir.x >= 0)
 		return (&txtr_arr[EA]);
-	if (side == 1 && casted->dir.y < 0)
+	if (side == 1 && casted->dir.y <= 0)
 		return (&txtr_arr[NO]);
 	if (side == 0 && casted->dir.x < 0)
 		return (&txtr_arr[WE]);
@@ -44,9 +44,9 @@ static void	init_x_index_texture(t_texture_drawing_pack *tdp,
 									t_ray * casted)
 {
 	if (cam->side == 0)
-		tdp->wall_x = cam->pos.y + casted->distance + casted->dir.y;
+		tdp->wall_x = cam->pos.y + casted->distance * casted->dir.y;
 	else
-		tdp->wall_x = cam->pos.x + casted->distance + casted->dir.x;
+		tdp->wall_x = cam->pos.x + casted->distance * casted->dir.x;
 	tdp->wall_x -= floor(tdp->wall_x);
 	tdp->txtr_drawIdx.x = (int)(tdp->wall_x * (double)(tdp->txtr_ptr->w));
 	if (cam->side == 0 && casted->dir.x > 0)
@@ -70,8 +70,8 @@ static void	draw_texture_vertical_line(t_window *win,
 	i = tdp->yAxis_drawIndex.x;
 	while (i < tdp->yAxis_drawIndex.y)
 	{
-		tdp->txtr_drawIdx.y = (int)texPos & (texHeight - 1);
 		texPos += step;
+		tdp->txtr_drawIdx.y = (int)texPos & (texHeight - 1);
 		*(win->pixel[ray_index][i].color) = tdp->txtr_ptr->rowdata[texHeight *
 				tdp->txtr_drawIdx.y + tdp->txtr_drawIdx.x];
 		i++;
