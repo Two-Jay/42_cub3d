@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:00:33 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/14 04:46:42 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/15 17:01:59 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define RGB_RED 16777215
 # define EVENT_KEY_PRESS 2
 # define MOVE_SPEED 0.3
-# define ROT_SPEED 0.25
+# define ROT_SPEED 0.3
 
 /*
 **  key binding
@@ -57,7 +57,6 @@
 # define ANGLE_MIN 5
 # define FOV 66
 # define PLANE_INIT 0.66
-
 
 /*
 **  texture_index & spwan_direction binding
