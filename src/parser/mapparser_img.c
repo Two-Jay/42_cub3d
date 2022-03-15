@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 07:43:52 by jekim             #+#    #+#             */
-/*   Updated: 2022/03/14 02:25:50 by jekim            ###   ########.fr       */
+/*   Updated: 2022/03/15 17:08:42 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,21 @@ int img_loadchecker(t_texture *txtr)
 	return (!txtr->img.img_ptr || !txtr->rowdata);
 }
 
+int img_path_validator(const char *path)
+{
+	int fd;
+	
+	fd = open(path, O_RDONLY);
+	return (close(fd));
+}
+
 int	load_imgs(void *mlx_ptr, t_map *map, t_static *parsed)
 {
+	if (img_path_validator(parsed->NO_img_filepath)
+		|| img_path_validator(parsed->SO_img_filepath)
+		|| img_path_validator(parsed->WE_img_filepath)
+		|| img_path_validator(parsed->EA_img_filepath))
+			return (ERROR_OCCURED);
 	map->txtr = (t_texture *)ft_calloc(sizeof(t_texture), 4);
 	if (!map->txtr)
 		return (ERROR_OCCURED);
